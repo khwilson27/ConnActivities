@@ -4,39 +4,34 @@ var db = require("../models");
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
-    db.Burger.findAll({}).then(function (result) {
-      var hbsObject = {
-        burger: result
-      };
-      res.render("index", hbsObject);
+    db.Post.findAll({}).then(function (result) {
+      res.json(result);
     });
   });
 
-  app.post("/", function (req, res) {
-    db.Burger.create({
-      burger_name: req.body.name,
-      devoured: req.body.devoured
+  app.post("/register", function (req, res) {
+    db.User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
     }).then(function () {
       res.redirect("/");
     });
   });
 
-  app.put("/:id", function (req, res) {
-    db.Burger.update(
-      // Set Attribute values 
-      { devoured: req.body.devoured },
-      // Where clause / criteria 
-      { where: { id: req.params.id } }
-    ).then(function () {
-      res.redirect("/");
-    });
-  });
+//   app.post("/login", function (req, res) {
+//     db.User.update(
 
-  app.delete("/:id", function (req, res) {
-    db.Burger.destroy({
+//     ).then(function () {
+//       res.redirect("/");
+//     });
+//   });
+
+  app.delete("/my-activities/:id", function (req, res) {
+    db.User.destroy({
       where: { id: req.params.id }
     }).then(function () {
-      res.redirect('/');
+      res.redirect('/my-activities');
     });
   });
 
