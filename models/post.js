@@ -21,6 +21,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false,
       len: [1]
+    },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      len: [1],
+      defaultValue: false
     }
   },
     {
