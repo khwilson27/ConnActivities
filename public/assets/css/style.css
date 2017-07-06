@@ -1,0 +1,31 @@
+html body {
+    background-color: lightblue;
+}
+
+h1, h2 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.create-update-form {
+  padding: 5px;
+  margin: 5px;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+
