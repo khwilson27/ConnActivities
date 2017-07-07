@@ -22,11 +22,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       len: [1]
     },
-    completed: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      len: [1],
-      defaultValue: false
+    partnerId: {
+      type: DataTypes.INTEGER
     }
   },
     {
