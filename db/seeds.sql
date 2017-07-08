@@ -1,8 +1,8 @@
 -- Insert a set of records.
-USE burgers_db;
+USE datebasehere;
 
-INSERT INTO food 
-	(burger_name, devoured) 
+INSERT INTO table_here 
+	(column1, column2) 
 VALUES
-	("Double Double", 0),
-	("Western Bacon", 1);
+	(val1, val2),
+	(val3, val4);

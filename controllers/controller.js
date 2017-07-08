@@ -26,6 +26,7 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/sign-up.html"));
   });
 
+    // grabs posts from db to populate home page with activites
   app.get("/", function (req, res) {
     db.Post.findAll({}).then(function (result) {
       res.json(result);
@@ -41,14 +42,6 @@ module.exports = function (app) {
       res.redirect("/");
     });
   });
-
-//   app.post("/login", function (req, res) {
-//     db.User.update(
-
-//     ).then(function () {
-//       res.redirect("/");
-//     });
-//   });
 
   app.delete("/my-activities/:id", function (req, res) {
     db.User.destroy({

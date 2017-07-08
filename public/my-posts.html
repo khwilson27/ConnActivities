@@ -6,14 +6,13 @@
     <title>ConnActivities | My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-        .thumbnail {
-            padding: 0;
-        }
+    .thumbnail {
+        padding: 0;
+    }
     </style>
 </head>
 
@@ -33,13 +32,11 @@
     </nav>
     <div class="container">
         <div class="row">
-
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">My Posts</h3>
                     </div>
-
                     <div class="row">
                         <div class="panel-body">
                             <div class="col-md-3">
@@ -47,7 +44,8 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal">Details</a>
+                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +54,8 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal">Details</a>
+                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -65,27 +64,21 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal">Details</a>
+                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- closes row div -->
-
-
-
                 </div>
             </div>
-
-
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Attending</h3>
                     </div>
-
                     <div class="row">
                         <div class="panel-body">
                             <div class="col-md-3">
@@ -93,7 +86,8 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal">Details</a>
+                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right" role="button">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +96,8 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal">Details</a>
+                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right" role="button">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -111,28 +106,23 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal">Details</a>
+                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right" role="button">Cancel</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- closes row div -->
-
-
-
                 </div>
+                <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
             </div>
-
-
-
         </div>
         <!-- closes row div -->
     </div>
     <!-- closes container div -->
-        <!-- BEGIN MODAL -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <!-- BEGIN DETAILS MODAL -->
+    <div id="modalDetails" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -154,8 +144,57 @@
             </div>
         </div>
     </div>
-    <!-- END MODAL -->
-
+    <!-- END DETAILS MODAL -->
+    <!-- BEGIN CREATE POST MODAL -->
+    <div id="modalCreate" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Post</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Title</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="inputEmail3" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Who</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword3" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Where</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword3" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">When</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword3" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Create Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END CREATE POST MODAL -->
 </body>
 
 </html>
