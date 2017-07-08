@@ -13,7 +13,12 @@ module.exports = function(sequelize, DataTypes) {
       len: [1]
     },
     address: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    },
+    category: {
+      type: DataTypes.STRING,
       allowNull: false,
       len: [1]
     },
