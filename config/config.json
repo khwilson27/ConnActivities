@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "conactivities",
+    "database": "connactivities",
     "host": "localhost",
     "dialect": "mysql"
   },
