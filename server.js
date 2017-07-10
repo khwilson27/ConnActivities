@@ -6,8 +6,12 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+
+// Authentication Packages
+var session = require("express-session");
 var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
+var MySQLStore = require('express-mysql-session')(session);
 
 // Sets up the Express App
 // =============================================================
@@ -31,7 +35,7 @@ passport.use(new LocalStrategy(
   function (username, password, done) {
     console.log(username);
     console.log(password);
-    return done(null, "eyyy test string");
+    return done(null, "asdfasdfa");
   }));
 
 

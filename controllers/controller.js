@@ -33,7 +33,7 @@ module.exports = function (app) {
   // ================================================================================================
 
   // grabs posts from db to populate home page with activites
-  app.get("/home", function (req, res) {
+  app.get("/posts", function (req, res) {
     db.Post.findAll({}).then(function (result) {
       res.json(result);
     });
