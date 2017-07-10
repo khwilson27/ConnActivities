@@ -31,33 +31,52 @@
                     </div>
                     <div class="panel-body">
 
-                        <form class="form-horizontal" method="POST" action="/login">
+                        <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="inputEmail3" required="">
+                                    <input type="email" class="form-control" id="inputEmail" required="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="inputPassword3" required="">
+                                    <input type="password" class="form-control" id="inputPassword" required="">
                                 </div>
                             </div>
                             <div class="form-group last">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-primary btn-md">Sign In</button>
+                                    <button type="submit" class="btn btn-primary btn-md" id="loginBtn">Sign In</button>
                                 </div>
                             </div>
                         </form>
-
                     </div>
-                    <div class="panel-footer text-center">Not Registered? <a href="/sign-up" class="">Register here</a>
+                    <div class="panel-footer text-center">Not Registered? <a href="#" class="">Register here</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // allows user to create post...grabs values from form
+            $("#loginBtn").on("click", function (event) {
+                event.preventDefault();
+                var loginInputs = {
+                    email: $("#inputEmail").val().trim(),
+                    password: $("#inputPassword").val().trim(),
+                };
+
+                // sends form values to db
+                $.post("/api/login", loginInputs)
+                    .done(function (data) {
+                        console.log(data);
+                        alert("Signing in...");
+                    });
+            });
+        })
+    </script>
 </body>
 
 </html>

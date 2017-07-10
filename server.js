@@ -7,12 +7,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
-// Authentication Packages
-var session = require("express-session");
-var passport = require("passport");
-var LocalStrategy = require('passport-local').Strategy;
-var MySQLStore = require('express-mysql-session')(session);
-
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -30,21 +24,12 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Static directory
 app.use(express.static("./public"));
 
-// Passport.js login auth stuff
-passport.use(new LocalStrategy(
-  function (username, password, done) {
-    console.log(username);
-    console.log(password);
-    return done(null, "asdfasdfa");
-  }));
-
-
 // Import routes and give the server access to them.
 require("./controllers/controller.js")(app);
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync().then(function () {
-  app.listen(PORT, function () {
+db.sequelize.sync().then(function() {
+  app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
 });

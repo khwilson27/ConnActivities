@@ -1,3 +1,5 @@
+USE connactivities;
+
 INSERT INTO Users (username, password, email) 
 VALUES
 	("nnelson", "123456", "nnelson@gmail.com"),
@@ -21,4 +23,6 @@ VALUES
 	("bboettger", "google", "bboettger@gmail.com"),
 	("cchristenson", "zxcvbnm", "cchristenson@gmail.com");
 
-	INSERT INTO Posts (username, password, email)
+INSERT INTO Posts (user_id, description, address)
+VALUES
+	(1, "test", "test");
