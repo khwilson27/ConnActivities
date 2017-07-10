@@ -21,4 +21,6 @@ VALUES
 	("bboettger", "google", "bboettger@gmail.com"),
 	("cchristenson", "zxcvbnm", "cchristenson@gmail.com");
 
-	INSERT INTO Posts (username, password, email)
+INSERT INTO Posts (user_id, description, address)
+VALUES
+	(1, "test", "test");
