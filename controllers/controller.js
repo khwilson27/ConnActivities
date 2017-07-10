@@ -1,31 +1,44 @@
 // Import the model (burger.js) to use its database functions.
 var db = require("../models");
 
-module.exports = function (app) {
+module.exports = function(app) {
 
-    // grabs posts from db to populate home page with activites
-  app.get("/", function (req, res) {
-    db.Post.findAll({}).then(function (result) {
-      res.json(result);
-    });
-  });
+        // grabs posts from db to populate home page with activites
+        app.get("/", function(req, res) {
+            db.Post.findAll({}).then(function(result) {
+                res.json(result);
+            });
+        });
 
-  app.post("/register", function (req, res) {
-    db.User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
-    }).then(function () {
-      res.redirect("/");
-    });
-  });
+        //need second api get route
 
-  app.delete("/my-activities/:id", function (req, res) {
-    db.User.destroy({
-      where: { id: req.params.id }
-    }).then(function () {
-      res.redirect('/my-activities');
-    });
-  });
+        app.post("/register", function(req, res) {
+            db.User.create({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
+            }).then(function() {
+                res.redirect("/");
+            });
+        });
 
-} // close module export function
+        app.post("/api/newPost", function(req, res) {
+            db.Post.create({
+                title: req.body.title,
+                who: req.body.who,
+                where: req.body.where,
+                when: req.body.when
+            }).then(function() {
+                res.redirect("/");
+            });
+        });
+
+        app.delete("/my-activities/:id", function(req, res) {
+            db.User.destroy({
+                where: { id: req.params.id }
+            }).then(function() {
+                res.redirect('/my-activities');
+            });
+        });
+
+    } // close module export function
