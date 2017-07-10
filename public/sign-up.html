@@ -6,20 +6,22 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-    .panel-default {
-        margin-top: 4em;
-    }
-    
-    #logo {
-        font-size: 4em;
-    }
-    label {
-        text-align: right;
-    }
+        .panel-default {
+            margin-top: 4em;
+        }
+
+        #logo {
+            font-size: 4em;
+        }
+
+        label {
+            text-align: right;
+        }
     </style>
 </head>
 
@@ -36,38 +38,63 @@
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-3 control-label">Username</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="inputEmail3" required="">
+                                    <input type="email" class="form-control" id="inputUsername" required="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="inputEmail3" required="">
+                                    <input type="email" class="form-control" id="inputEmail" required="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="inputPassword3" required="">
+                                    <input type="password" class="form-control" id="inputPassword" required="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-3 control-label">Verify</label>
+                                <label for="inputPassword3" class="col-sm-3 control-label">Re-Enter Password</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="inputPassword3" required="">
+                                    <input type="password" class="form-control" id="inputPasswordVerify" required="">
                                 </div>
                             </div>
                             <div class="form-group last">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-primary btn-md">Sign Up</button>
+                                    <button type="submit" class="btn btn-primary btn-md" id="registerBtn">Sign Up</button>
                                 </div>
                             </div>
                         </form>
+                        <div class="panel-footer text-center">Already have an account? <a href="/sign-in" class="">Sign-In Here</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        // allows user to register...grabs values from form
+        $("#registerBtn").on("click", function (event) {
+            event.preventDefault();
+            if ($("#inputPassword").val().trim() != $("#inputPasswordVerify").val().trim()) {
+                alert("Passwords do NOT match!");
+            } else {
+                var newUser = {
+                    username: $("#inputUsername").val().trim(),
+                    email: $("#inputEmail").val().trim(),
+                    password: $("#inputPassword").val().trim()
+                };
+
+                // sends form values to db
+                $.post("/api/register", newUser)
+                    .done(function (data) {
+                        console.log(data);
+                        alert("Registering new user...");
+                    });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

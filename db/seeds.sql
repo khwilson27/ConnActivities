@@ -1,3 +1,5 @@
+USE connactivities;
+
 INSERT INTO Users (username, password, email) 
 VALUES
 	("nnelson", "123456", "nnelson@gmail.com"),

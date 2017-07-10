@@ -1,8 +1,17 @@
-// Import the model (burger.js) to use its database functions.
+// Import the model to use its database functions.
 var path = require("path");
 var db = require("../models");
 
+// Security packages
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 module.exports = function (app) {
+
+  // HTML ROUTES
+  //=================================================================================
 
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
@@ -26,10 +35,46 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/sign-up.html"));
   });
 
+  // API ROUTES
+  //=================================================================================
+
   // grabs posts from db to populate home page with activites
   app.get("/", function (req, res) {
     db.Post.findAll({}).then(function (result) {
       res.json(result);
+    });
+  });
+
+  // creates new user
+  app.post("/api/register", function (req, res) {
+
+    // create salt and use salt to hash the plain text password
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(req.body.password, salt);
+
+    // store new user info + salt + hashed password into db
+    db.User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: hash,
+      salt: salt
+    }).then(function () {
+      res.redirect("/");
+    });
+  });
+
+  // after user logs in, compare entered password with db password 
+  app.post("/api/login", function (req, res) {
+    db.User.findOne({ where: { email: req.body.email } }).then(function (data) {
+
+      // hash the inputted password
+      var hash = bcrypt.hashSync(req.body.password, data.salt);
+
+      if (data.password === hash) {
+        res.json("Log in successful!");
+      } else {
+        res.json("Incorrect login info!");
+      }
     });
   });
 
@@ -45,17 +90,6 @@ module.exports = function (app) {
       include: [db.User]
     }).then(function (dbPost) {
       res.json(dbPost);
-    });
-  });
-
-  // creates new user
-  app.post("/api/register", function (req, res) {
-    db.User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
-    }).then(function () {
-      res.redirect("/");
     });
   });
 

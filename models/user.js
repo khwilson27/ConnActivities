@@ -8,14 +8,20 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    },
+    salt: {
+      type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      len: [1]
+      len: [1],
+      unique: true
     }
   },
   {
