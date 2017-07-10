@@ -6,17 +6,18 @@
     <title>Sign In</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-    .panel-default {
-        margin-top: 4em;
-    }
-    
-    #logo {
-        font-size: 4em;
-    }
+        .panel-default {
+            margin-top: 4em;
+        }
+
+        #logo {
+            font-size: 4em;
+        }
     </style>
 </head>
 
@@ -29,7 +30,8 @@
                     <div class="panel-heading text-center"> <strong>Sign In</strong>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal">
+
+                        <form class="form-horizontal" method="POST" action="/login">
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-9">
@@ -48,8 +50,9 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
-                    <div class="panel-footer text-center">Not Registered? <a href="#" class="">Register here</a>
+                    <div class="panel-footer text-center">Not Registered? <a href="/sign-up" class="">Register here</a>
                     </div>
                 </div>
             </div>
