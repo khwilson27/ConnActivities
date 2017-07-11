@@ -38,13 +38,6 @@ module.exports = function (app) {
   // API ROUTES
   //=================================================================================
 
-  // grabs posts from db to populate home page with activites
-  app.get("/", function (req, res) {
-    db.Post.findAll({}).then(function (result) {
-      res.json(result);
-    });
-  });
-
   // creates new user
   app.post("/api/register", function (req, res) {
 
@@ -109,19 +102,34 @@ module.exports = function (app) {
     });
   });
 
-  // GET route for getting all of the posts
+  // GET route for getting all posts where partnerId is null
   app.get("/api/post", function (req, res) {
 
-    var query = {};
-    if (req.query.user_id) {
-      query.UserId = req.query.user_id;
+    var token = req.headers.authorization;
+    var decodedToken;
+
+    if (token) {
+      // Checks to see if it's expired
+      jwt.verify(token, 'secretWord', function (err, decoded) {
+        decodedToken = decoded;
+      });
     }
-    // include all of the Users to these posts
-    db.Post.findAll({
-      where: query,
-      include: [db.User]
-    }).then(function (dbPost) {
-      res.json(dbPost);
+    
+    // find all of the posts and return username and posts
+    db.Post.findAll({where : {
+      partnerId : null
+    }}).then(function (dbPost) {
+      var data = {
+        posts: dbPost
+      };
+
+      if (decodedToken) {
+        data.username = decodedToken.username
+      } else {
+        data.username = null;
+      }
+
+      res.json(data);
     });
   });
 
