@@ -72,7 +72,16 @@
                 $.post("/api/login", loginInputs)
                     .done(function (data) {
                         console.log(data);
-                        alert("Signing in...");
+
+                        if (!data.token) {
+                            alert(data.message);
+                        } else {
+                            window.localStorage.setItem("token", data.token);
+                            console.log(window.localStorage);
+                            alert("Signing in...");
+                            window.location.href = "/home";
+                        }
+
                     });
             });
         })
