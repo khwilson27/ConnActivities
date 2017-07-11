@@ -6,14 +6,13 @@
     <title>ConnActivities | My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-        .thumbnail {
-            padding: 0;
-        }
+    .thumbnail {
+        padding: 0;
+    }
     </style>
 </head>
 
@@ -46,7 +45,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +55,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +65,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +87,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-default btn-xs pull-right" role="button">Cancel</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +97,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-default btn-xs pull-right" role="button">Cancel</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +107,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-default btn-xs pull-right" role="button">Cancel</a>
+                                        <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,19 +127,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Hiking: Aliso and Wood Canyons Wilderness Park</h4>
+                    <h4 class="modal-title" id="title"></h4>
                 </div>
                 <div class="modal-body">
-                    <p>Approximately 4,500 acres of wilderness and natural open space land. Originally, part of the Juaneno
-                        or Acajchemem tribal land, it later was owned by Don Juan Avila, Louis Moulton, The Mission Viejo
-                        Company and now is under the jurisdiction of OC Parks.</p>
-                    <p>Within the park lands are mature oaks, sycamores, and elderberry trees, two year round streams and over
-                        30 miles of official trails. Many rare and endangered plants and animals make this park their home.
-                        This park is designated as a wildlife sanctuary.</p>
+                    <div id="description">
+                    </div>
                     <hr>
-                    <p><strong>Where:</strong> 28373 Alicia Parkway Laguna Niguel, CA 92677</p>
-                    <p><strong>When:</strong> 07/07/17 at 8:00 am</p>
-                    <p><strong>Who:</strong> jenny_8675309</p>
+                    <p><strong>Address:</strong>
+                        <div id="address"></div>
+                    </p>
+                    <p><strong>Time:</strong>
+                        <div id="time"></div>
+                    </p>
+                    <p><strong>Posted by:</strong>
+                        <div id="posted-by"></div>
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -187,7 +188,7 @@
                         <div class="form-group">
                             <label for="time" class="col-sm-3 control-label">Time</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="time" required="">
+                                <input type="datetime-local" class="form-control" id="time" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -206,29 +207,28 @@
         </div>
     </div>
     <!-- END CREATE POST MODAL -->
-
     <script type="text/javascript">
-        $(document).ready(function () {
-            // allows user to create post...grabs values from form
-            $("#createPost").on("click", function (event) {
-                event.preventDefault();
-                var newPost = {
-                    title: $("#title").val().trim(),
-                    category: $("#category").val().trim(),
-                    address: $("#address").val().trim(),
-                    time: $("#time").val().trim(),
-                    description: $("#description").val().trim()
-                };
+    $(document).ready(function() {
+        // allows user to create post...grabs values from form
+        $("#createPost").on("click", function(event) {
+            event.preventDefault();
+            var newPost = {
+                title: $("#title").val().trim(),
+                category: $("#category").val().trim(),
+                address: $("#address").val().trim(),
+                time: $("#time").val().trim(),
+                description: $("#description").val().trim()
+            };
 
-                // query DB to add new post
-                $.post("/api/post", newPost)
-                    .done(function (data) {
-                        console.log(data);
-                        alert("Adding post...");
+            // query DB to add new post
+            $.post("/api/post", newPost)
+                .done(function(data) {
+                    console.log(data);
+                    alert("Adding post...");
 
-                    });
-            });
-        })
+                });
+        });
+    })
     </script>
 </body>
 
