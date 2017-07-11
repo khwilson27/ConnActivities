@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Post = sequelize.define("Post", {
     title: {
       type: DataTypes.STRING,
@@ -30,21 +30,16 @@ module.exports = function(sequelize, DataTypes) {
     partnerId: {
       type: DataTypes.INTEGER
     }
-  },
-    {
-      // We're saying that we want our Author to have Posts
-      classMethods: {
-        associate: function(models) {
-          // An Author (foreignKey) is required or a Post can't be made
-          Post.belongsTo(models.User, {
-            foreignKey: {
-              allowNull: false
-            }
-          });
-        }
+  });
+
+  Post.associate = function (models) {
+    Post.belongsTo(models.User, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
       }
-    }
-  );
-  
+    });
+  }
+
   return Post;
 };

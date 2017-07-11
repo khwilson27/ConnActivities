@@ -6,13 +6,14 @@
     <title>ConnActivities | My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-    .thumbnail {
-        padding: 0;
-    }
+        .thumbnail {
+            padding: 0;
+        }
     </style>
 </head>
 
@@ -26,7 +27,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/home">Home</a></li>
                 <li><a href="/my-posts">My Posts</a></li>
-                <li><a href="#">Sign Out</a></li>
+                <li><a href="#" id="signOut">Sign Out</a></li>
+                <li><a id="username"></a></li>
             </ul>
         </div>
     </nav>
@@ -127,20 +129,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="title"></h4>
+                    <h4 class="modal-title" id="details-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <div id="description">
+                    <div id="details-description">
                     </div>
                     <hr>
                     <p><strong>Address:</strong>
-                        <div id="address"></div>
+                        <div id="details-address"></div>
                     </p>
                     <p><strong>Time:</strong>
-                        <div id="time"></div>
+                        <div id="details-time"></div>
                     </p>
                     <p><strong>Posted by:</strong>
-                        <div id="posted-by"></div>
+                        <div id="details-posted-by"></div>
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -207,28 +209,63 @@
         </div>
     </div>
     <!-- END CREATE POST MODAL -->
+
     <script type="text/javascript">
-    $(document).ready(function() {
-        // allows user to create post...grabs values from form
-        $("#createPost").on("click", function(event) {
-            event.preventDefault();
-            var newPost = {
-                title: $("#title").val().trim(),
-                category: $("#category").val().trim(),
-                address: $("#address").val().trim(),
-                time: $("#time").val().trim(),
-                description: $("#description").val().trim()
-            };
+        $(document).ready(function () {
 
-            // query DB to add new post
-            $.post("/api/post", newPost)
-                .done(function(data) {
-                    console.log(data);
-                    alert("Adding post...");
+            console.log(window.localStorage);
 
+            if (window.localStorage.getItem("token")) {
+
+                $.ajax({
+                    url: "/api/my-post",
+                    type: 'GET',
+                    // Fetch the stored token from localStorage and set in the header
+                    headers: { "Authorization": localStorage.getItem('token') },
+                    success: function (data) {
+                        console.log("success!");
+                        console.log(data);
+                        $("#username").text(data.username);
+                    }
                 });
-        });
-    })
+            }
+
+            // allows user to create post...grabs values from form
+            $("#createPost").on("click", function (event) {
+                event.preventDefault();
+
+                if (!window.localStorage.getItem("token")) {
+                    alert("You need to be signed in!");
+                    window.location.href = "/sign-in"
+                } else {
+                    var newPost = {
+                        title: $("#title").val().trim(),
+                        category: $("#category").val().trim(),
+                        address: $("#address").val().trim(),
+                        time: $("#time").val().trim(),
+                        description: $("#description").val().trim(),
+                        authorization: window.localStorage.getItem("token")
+                    };
+
+                    console.log(newPost);
+
+                    // query DB to add new post
+                    $.post("/api/post", newPost)
+                        .done(function (data) {
+                            console.log(data);
+                            alert("Adding post...");
+                            window.location.href = "/my-posts";
+                        });
+                }
+
+            });
+
+            // allows user to sign out...deletes token and redirects to login
+            $("#signOut").on("click", function () {
+                window.localStorage.removeItem("token");
+                window.location.href = "/sign-in";
+            });
+        })
     </script>
 </body>
 
