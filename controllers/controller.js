@@ -67,31 +67,41 @@ module.exports = function (app) {
   app.post("/api/login", function (req, res) {
     db.User.findOne({ where: { email: req.body.email } }).then(function (data) {
 
-      // hash the inputted password
-      var hash = bcrypt.hashSync(req.body.password, data.salt);
-
-      // if user is found and password is right
-      if (data.password === hash) {
-
-        // create a token
-        var token = jwt.sign({ "payloadTestUserId": data.id }, "secretWord", {
-          expiresIn: "24h" // expires in 24 hours
-        });
-
-        // return the information including token as JSON
-        res.json({
-          success: true,
-          message: 'Enjoy your token!',
-          token: token
-        });
-      } else {
-        // otherwise, return login failure message
+      if (!data) {
         res.json({
           success: false,
-          message: 'Incorrect login info',
+          message: 'User not found',
           token: null
         });
+      } else {
+
+        // hash the inputted password
+        var hash = bcrypt.hashSync(req.body.password, data.salt);
+
+        // if user is found and password is right
+        if (data.password === hash) {
+
+          // create a token
+          var token = jwt.sign({ "payloadTestUserId": data.id }, "secretWord", {
+            expiresIn: "24h" // expires in 24 hours
+          });
+
+          // return the information including token as JSON
+          res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token
+          });
+        } else {
+          // otherwise, return login failure message
+          res.json({
+            success: false,
+            message: 'Incorrect login info',
+            token: null
+          });
+        }
       }
+
     });
   });
 
