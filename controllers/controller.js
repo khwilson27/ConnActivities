@@ -2,11 +2,11 @@
 var path = require("path");
 var db = require("../models");
 
-// Security packages
+
+// Auth Packages
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
+var jwt = require("jsonwebtoken");
 
 module.exports = function (app) {
 
@@ -70,10 +70,27 @@ module.exports = function (app) {
       // hash the inputted password
       var hash = bcrypt.hashSync(req.body.password, data.salt);
 
+      // if user is found and password is right
       if (data.password === hash) {
-        res.json("Log in successful!");
+
+        // create a token
+        var token = jwt.sign({ "payloadTestUserId": data.id }, "secretWord", {
+          expiresIn: "24h" // expires in 24 hours
+        });
+
+        // return the information including token as JSON
+        res.json({
+          success: true,
+          message: 'Enjoy your token!',
+          token: token
+        });
       } else {
-        res.json("Incorrect login info!");
+        // otherwise, return login failure message
+        res.json({
+          success: false,
+          message: 'Incorrect login info',
+          token: null
+        });
       }
     });
   });

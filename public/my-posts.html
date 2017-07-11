@@ -208,25 +208,27 @@
     <!-- END CREATE POST MODAL -->
 
     <script type="text/javascript">
-        // allows user to create post...grabs values from form
-        $("#createPost").on("click", function (event) {
-            event.preventDefault();
-            var newPost = {
-                title: $("#title").val().trim(),
-                category: $("#category").val().trim(),
-                address: $("#address").val().trim(),
-                time: $("#time").val().trim(),
-                description: $("#description").val().trim()
-            };
+        $(document).ready(function () {
+            // allows user to create post...grabs values from form
+            $("#createPost").on("click", function (event) {
+                event.preventDefault();
+                var newPost = {
+                    title: $("#title").val().trim(),
+                    category: $("#category").val().trim(),
+                    address: $("#address").val().trim(),
+                    time: $("#time").val().trim(),
+                    description: $("#description").val().trim()
+                };
 
-            // query DB to add new post
-            $.post("/api/post", newPost)
-                .done(function (data) {
-                    console.log(data);
-                    alert("Adding post...");
+                // query DB to add new post
+                $.post("/api/post", newPost)
+                    .done(function (data) {
+                        console.log(data);
+                        alert("Adding post...");
 
-                });
-        });
+                    });
+            });
+        })
     </script>
 </body>
 
