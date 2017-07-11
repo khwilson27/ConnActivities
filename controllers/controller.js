@@ -7,6 +7,7 @@ var db = require("../models");
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var jwt = require("jsonwebtoken");
+var jwtDecode = require('jwt-decode');
 
 module.exports = function (app) {
 
@@ -111,17 +112,22 @@ module.exports = function (app) {
 
   // GET route for getting all of the posts
   app.get("/api/post", function (req, res) {
-    var query = {};
-    if (req.query.user_id) {
-      query.UserId = req.query.user_id;
-    }
-    // include all of the Users to these posts
-    db.Post.findAll({
-      where: query,
-      include: [db.User]
-    }).then(function (dbPost) {
-      res.json(dbPost);
-    });
+
+    var token = req.body.token;
+    var decoded = jwtDecode(token);
+    console.log(decoded);
+
+    // var query = {};
+    // if (req.query.user_id) {
+    //   query.UserId = req.query.user_id;
+    // }
+    // // include all of the Users to these posts
+    // db.Post.findAll({
+    //   where: query,
+    //   include: [db.User]
+    // }).then(function (dbPost) {
+    //   res.json(dbPost);
+    // });
   });
 
   // creates new post
