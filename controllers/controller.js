@@ -7,7 +7,6 @@ var db = require("../models");
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var jwt = require("jsonwebtoken");
-var jwtDecode = require('jwt-decode');
 
 module.exports = function (app) {
 
@@ -60,7 +59,7 @@ module.exports = function (app) {
       password: hash,
       salt: salt
     }).then(function () {
-      res.redirect("/");
+      res.end("Registration complete!");
     });
   });
 
@@ -86,7 +85,7 @@ module.exports = function (app) {
           var token = jwt.sign({
             "id": data.id,
             "username": data.username,
-            "email" : data.email
+            "email": data.email
           }, "secretWord", {
               expiresIn: "24h" // expires in 24 hours
             });
@@ -113,35 +112,85 @@ module.exports = function (app) {
   // GET route for getting all of the posts
   app.get("/api/post", function (req, res) {
 
-    var token = req.body.token;
-    var decoded = jwtDecode(token);
-    console.log(decoded);
+    var query = {};
+    if (req.query.user_id) {
+      query.UserId = req.query.user_id;
+    }
+    // include all of the Users to these posts
+    db.Post.findAll({
+      where: query,
+      include: [db.User]
+    }).then(function (dbPost) {
+      res.json(dbPost);
+    });
+  });
 
-    // var query = {};
-    // if (req.query.user_id) {
-    //   query.UserId = req.query.user_id;
-    // }
-    // // include all of the Users to these posts
-    // db.Post.findAll({
-    //   where: query,
-    //   include: [db.User]
-    // }).then(function (dbPost) {
-    //   res.json(dbPost);
-    // });
+  // Get route for getting a single user's posts
+  app.get("/api/my-post", function (req, res) {
+
+    var token = req.headers.authorization;
+
+    // Checks to see if it's expired
+    jwt.verify(token, 'secretWord', function (err, decoded) {
+      if (err) {
+        /*
+          err = {
+            name: 'TokenExpiredError',
+            message: 'jwt expired',
+            expiredAt: 1408621000
+          }
+        */
+        console.error(err);
+      } else {
+
+        // find all of the posts to this user
+        db.Post.findAll({
+          where: { UserId: decoded.id },
+        }).then(function (dbPost) {
+          var data = {
+            username: decoded.username,
+            posts: dbPost
+          }
+          res.json(dbPost);
+        });
+      };
+    });
   });
 
   // creates new post
   app.post("/api/post", function (req, res) {
-    db.Post.create({
-      title: req.body.title,
-      description: req.body.description,
-      address: req.body.address,
-      category: req.body.category,
-      time: req.body.time
-    }).then(function () {
-      res.redirect("/my-posts");
-    });
+
+    var token = req.body.authorization;
+
+    // Checks to see if it's expired
+    jwt.verify(token, 'secretWord', function (err, decoded) {
+      if (err) {
+        /*
+          err = {
+            name: 'TokenExpiredError',
+            message: 'jwt expired',
+            expiredAt: 1408621000
+          }
+        */
+        console.error(err);
+      } else {
+        console.log(decoded);
+        var userId = decoded.id
+
+        db.Post.create({
+          UserId: decoded.id,
+          title: req.body.title,
+          description: req.body.description,
+          address: req.body.address,
+          category: req.body.category,
+          time: req.body.time
+        }).then(function () {
+          res.end("Added new post!");
+        });
+      }
+    })
   });
+
 
   // deletes post
   app.delete("/api/my-activities/:id", function (req, res) {
