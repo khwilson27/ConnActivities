@@ -82,9 +82,13 @@ module.exports = function (app) {
         if (data.password === hash) {
 
           // create a token
-          var token = jwt.sign({ "payloadTestUserId": data.id }, "secretWord", {
-            expiresIn: "24h" // expires in 24 hours
-          });
+          var token = jwt.sign({
+            "id": data.id,
+            "username": data.username,
+            "email" : data.email
+          }, "secretWord", {
+              expiresIn: "24h" // expires in 24 hours
+            });
 
           // return the information including token as JSON
           res.json({
