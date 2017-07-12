@@ -28,7 +28,9 @@
                 <li><a href="/home">Home</a></li>
                 <li><a href="/my-posts">My Posts</a></li>
                 <li><a id="signOut">Sign Out</a></li>
-                <li><a id="username"></a></li>
+                <li>
+                    <a id="username"></a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -39,8 +41,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Sports</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body sports">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -66,7 +68,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -75,8 +77,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Entertainment</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body entertainment">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -102,7 +104,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -113,8 +115,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Food</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body food">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -140,7 +142,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -149,8 +151,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Miscellaneous</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body miscellaneous">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -176,7 +178,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -206,7 +208,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn" data-id="3">Accept</button>
                 </div>
             </div>
         </div>
@@ -214,25 +216,117 @@
     <!-- END DETAILS MODAL -->
 
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
 
             $.ajax({
                 url: "/api/post",
                 type: 'GET',
                 // Fetch the stored token from localStorage and set in the header
-                headers: { "Authorization": localStorage.getItem('token') },
+                headers: {
+                    "Authorization": localStorage.getItem('token')
+                },
                 success: function (data) {
                     console.log("success!");
-                    console.log(data);
+                    // console.log(data);
+                    // console.log(data.posts[0].category);
 
+                    // add username to navbar if logged in, and 'sign-in' if not
                     if (data.username) {
                         $("#username").text(data.username);
+                    } else {
+                        $("#username").text("Sign-In");
+                        $("#username").attr("href", "/sign-in");
                     }
 
+                    for (var i = 0; i < data.posts.length; i++) {
+
+                        console.log(data.posts[i].category);
+                        var cat = data.posts[i].category;
+
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
+
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-4");
+
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
+
+                        newDiv3Nested = $("<img>");
+                        newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+
+
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
+
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
+
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
+
+                        // Add the activity details info to the detail button
+
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+
+
+                        switch (cat) {
+                            case "sports":
+                                $(".sports").append(newDiv);
+                                break;
+
+                            case "entertainment":
+                                $(".entertainment").append(newDiv);
+                                break;
+
+                            case "food":
+                                $(".food").append(newDiv);
+                                break;
+
+                            case "miscellaneous":
+                                $(".miscellaneous").append(newDiv);
+                                break;
+                        }
+                    }
                 }
             });
 
+            // accept button on-click (each card will have unique data attr id)
+            // sequelize put function (using data attr id)
+            $("#acceptBtn").on("click", function (event) {
+                event.preventDefault();
+
+                if (confirm("Are you sure you want to accept this activity?")) {
+                    var acceptData = {
+                        authorization: window.localStorage.getItem("token"),
+                        activityID: $(this).attr("data-id")
+                    }
+                    $.ajax({
+                        url: "/api/post/accept",
+                        type: 'PUT',
+                        data: acceptData,
+                        success: function () {
+                            alert("Accepting post...");
+                            window.location.href = "/home";
+                        }
+                    });
+                }
+
+            })
 
             // allows user to sign out...deletes token and redirects to login
             $("#signOut").on("click", function () {

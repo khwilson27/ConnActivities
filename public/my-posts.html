@@ -28,11 +28,19 @@
                 <li><a href="/home">Home</a></li>
                 <li><a href="/my-posts">My Posts</a></li>
                 <li><a href="#" id="signOut">Sign Out</a></li>
-                <li><a id="username"></a></li>
+                <li>
+                    <a id="username"></a>
+                </li>
             </ul>
         </div>
     </nav>
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -47,11 +55,7 @@
                                     <div class="caption">
                                         <h4>Activity</h4>
                                         <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-<<<<<<< HEAD
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" data-id="2" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
-=======
                                         <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" data-id="1" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
->>>>>>> 51fe1fafe94400314b3077a9c4fd2419d3d27277
                                     </div>
                                 </div>
                             </div>
@@ -121,12 +125,12 @@
                     </div>
                     <!-- closes row div -->
                 </div>
-                <a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
             </div>
         </div>
         <!-- closes row div -->
     </div>
     <!-- closes container div -->
+    
     <!-- BEGIN DETAILS MODAL -->
     <div id="modalDetails" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -157,6 +161,7 @@
         </div>
     </div>
     <!-- END DETAILS MODAL -->
+
     <!-- BEGIN CREATE POST MODAL -->
     <div id="modalCreate" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -223,18 +228,38 @@
             // run GET ajax call if token exists
             if (window.localStorage.getItem("token")) {
 
+                // API call to retrieve posts that user has created
                 $.ajax({
                     url: "/api/my-post",
                     type: 'GET',
                     // Fetch the stored token from localStorage and set in the header
-                    headers: { "Authorization": localStorage.getItem('token') },
+                    headers: {
+                        "Authorization": localStorage.getItem('token')
+                    },
                     success: function (data) {
-                        console.log("success!");
+                        console.log("success! Created posts");
                         console.log(data);
-                        $("#username").text(data.username); // 
+                        $("#username").text(data.username);
+
+                        // Build activity cards that user has created here 
                     }
                 });
-            } else {
+
+                // API call to retrieve posts that user has accepted
+                $.ajax({
+                    url: "/api/my-post/accepted",
+                    type: 'GET',
+                    // Fetch the stored token from localStorage and set in the header
+                    headers: {
+                        "Authorization": localStorage.getItem('token')
+                    },
+                    success: function (data) {
+                        console.log("success! Accepted posts");
+                        console.log(data);
+
+                        // Build activity cards that user has joined here
+                    }
+                });
             }
             // else {
             //     alert("Please log-in");
@@ -248,7 +273,7 @@
                 // if token does not exists, user not logged-in
                 if (!window.localStorage.getItem("token")) {
                     alert("You need to be signed in!");
-                    window.location.href = "/sign-in"
+                    window.location.href = "/sign-in";
                     // if token exists, they are logged-in and assign form data to newPost 
                 } else {
                     var newPost = {

@@ -114,11 +114,13 @@ module.exports = function (app) {
         decodedToken = decoded;
       });
     }
-    
+
     // find all of the posts and return username and posts
-    db.Post.findAll({where : {
-      partnerId : null
-    }}).then(function (dbPost) {
+    db.Post.findAll({
+      where: {
+        partnerId: null
+      }
+    }).then(function (dbPost) {
       var data = {
         posts: dbPost
       };
@@ -133,7 +135,7 @@ module.exports = function (app) {
     });
   });
 
-  // Get route for getting a single user's posts
+  // Get route for getting a single user's posts that they created
   app.get("/api/my-post", function (req, res) {
 
     var token = req.headers.authorization;
@@ -157,6 +159,37 @@ module.exports = function (app) {
         }).then(function (dbPost) {
           var data = {
             username: decoded.username,
+            posts: dbPost
+          }
+          res.json(data);
+        });
+      };
+    });
+  });
+
+  // Get route for getting a single user's posts that they accepted
+  app.get("/api/my-post/accepted", function (req, res) {
+
+    var token = req.headers.authorization;
+
+    // Checks to see if it's expired
+    jwt.verify(token, 'secretWord', function (err, decoded) {
+      if (err) {
+        /*
+          err = {
+            name: 'TokenExpiredError',
+            message: 'jwt expired',
+            expiredAt: 1408621000
+          }
+        */
+        console.error(err);
+      } else {
+
+        // find all of the posts to this user
+        db.Post.findAll({
+          where: { partnerId: decoded.id },
+        }).then(function (dbPost) {
+          var data = {
             posts: dbPost
           }
           res.json(data);
@@ -202,7 +235,7 @@ module.exports = function (app) {
 
   // deletes post
   app.delete("/api/my-activities/", function (req, res) {
-    
+
     var token = req.body.authorization;
 
     // Checks to see if it's expired
@@ -246,5 +279,35 @@ module.exports = function (app) {
         res.json(dbPost);
       });
   });
+
+  // adds User to partnerId of activity
+  app.put("/api/post/accept", function (req, res) {
+
+    var token = req.body.authorization;
+
+    // Checks to see if it's expired
+    jwt.verify(token, 'secretWord', function (err, decoded) {
+      if (err) {
+        /*
+          err = {
+            name: 'TokenExpiredError',
+            message: 'jwt expired',
+            expiredAt: 1408621000
+          }
+        */
+        console.error(err);
+      } else {
+
+        // update post partnerId to user
+        db.Post.update(
+          { partnerId: decoded.id },
+          { where: { id: req.body.activityID } 
+        }).then(function () {
+          res.end("Activity joined!");
+        });
+
+      }; // closes else
+    }) //closes jwt.verify
+  }) // closes app.put
 
 } // close module export function
