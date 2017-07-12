@@ -129,6 +129,7 @@
         <!-- closes row div -->
     </div>
     <!-- closes container div -->
+    
     <!-- BEGIN DETAILS MODAL -->
     <div id="modalDetails" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -159,6 +160,7 @@
         </div>
     </div>
     <!-- END DETAILS MODAL -->
+
     <!-- BEGIN CREATE POST MODAL -->
     <div id="modalCreate" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -224,33 +226,54 @@
         // run GET ajax call if token exists
         if (window.localStorage.getItem("token")) {
 
-            $.ajax({
-                url: "/api/my-post",
-                type: 'GET',
-                // Fetch the stored token from localStorage and set in the header
-                headers: {
-                    "Authorization": localStorage.getItem('token')
-                },
-                success: function(data) {
-                    console.log("success!");
-                    console.log(data);
-                    $("#username").text(data.username); // 
-                }
-            });
-        }
-        // else {
-        //     alert("Please log-in");
-        //     window.location.href = "/sign-in";
-        // }
+                // API call to retrieve posts that user has created
+                $.ajax({
+                    url: "/api/my-post",
+                    type: 'GET',
+                    // Fetch the stored token from localStorage and set in the header
+                    headers: {
+                        "Authorization": localStorage.getItem('token')
+                    },
+                    success: function (data) {
+                        console.log("success! Created posts");
+                        console.log(data);
+                        $("#username").text(data.username);
+
+                        // Build activity cards that user has created here 
+                    }
+                });
+
+                // API call to retrieve posts that user has accepted
+                $.ajax({
+                    url: "/api/my-post/accepted",
+                    type: 'GET',
+                    // Fetch the stored token from localStorage and set in the header
+                    headers: {
+                        "Authorization": localStorage.getItem('token')
+                    },
+                    success: function (data) {
+                        console.log("success! Accepted posts");
+                        console.log(data);
+
+                        // Build activity cards that user has joined here
+                    }
+                });
+            }
+            // else {
+            //     alert("Please log-in");
+            //     window.location.href = "/sign-in";
+            // }
+
 
         // allows user to create post...grabs values from form
         $("#createPost").on("click", function(event) {
             event.preventDefault();
 
-            // if token does not exists, user not logged-in
-            if (!window.localStorage.getItem("token")) {
-                alert("You need to be signed in!");
-                window.location.href = "/sign-in"
+
+                // if token does not exists, user not logged-in
+                if (!window.localStorage.getItem("token")) {
+                    alert("You need to be signed in!");
+                    window.location.href = "/sign-in";
                     // if token exists, they are logged-in and assign form data to newPost 
             } else {
                 var newPost = {

@@ -207,7 +207,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn" data-id="3">Accept</button>
                 </div>
             </div>
         </div>
@@ -216,42 +216,8 @@
 
 
     <script type="text/javascript">
-        // function runLoop(arr) {
-        //     for (var i = 0; i < arr.length; i++) {
-        //         console.log(data.posts[i].category);
-        // console.log(arr[i].category);
 
-
-        // Create the HTML Well (Section) and Add the table content for each reserved table
-        // var title = arr[i].title;
-        // var nullPost = $("div>");
-        // nullPost.addClass("thumbnail");
-
-        // nullPost.attr("src", "http://placehold.it/500x250/EEE");
-
-        // switch (cat) {
-        //     case "sports":
-        //         $("#sports").text(title);
-        //         break;
-
-        //     case "entertainment":
-        //         $("#entertainment").text(title);
-        //         break;
-
-        //     case "food":
-        //         $("#food").text(title);
-        //         break;
-
-        //     case "miscellaneous":
-        //         $("#miscellaneous").text(title);
-        //         break;
-        // }
-
-
-        //     }
-
-        // }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $.ajax({
                 url: "/api/post",
@@ -260,77 +226,109 @@
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 },
-                success: function(data) {
+                success: function (data) {
                     console.log("success!");
-                    console.log(data);
-                    console.log(data.posts[0].category);
+                    // console.log(data);
+                    // console.log(data.posts[0].category);
+
+                    // add username to navbar if logged in, and 'sign-in' if not
+
                     if (data.username) {
                         $("#username").text(data.username);
+                    } else {
+                        $("#username").text("Sign-In");
+                        $("#username").attr("href", "/sign-in");
                     }
+
                     for (var i = 0; i < data.posts.length; i++) {
 
                         console.log(data.posts[i].category);
                         var cat = data.posts[i].category;
 
-                        var newDiv = [];
-                        var newDiv2Nested = [];
-                        var newDiv3Nested = [];
-                        var newDiv4Nested = [];
-                        var newDiv5Nested = [];
-                        var newDiv6Nested = [];
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
 
-                        newDiv[i] = $("<div>");
-                        newDiv[i].addClass("col-md-4");
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-4");
 
-                        newDiv2Nested[i] = $("<div>");
-                        newDiv2Nested[i].addClass("thumbnail");
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
 
-                        newDiv3Nested[i] = $("<img>");
-                        newDiv3Nested[i].attr("src", "http://placehold.it/500x250/EEE");
+                        newDiv3Nested = $("<img>");
+                        newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
 
 
-                        newDiv4Nested[i] = $("<div>");
-                        newDiv4Nested[i].addClass("caption");
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
 
-                        newDiv5Nested[i] = $("<h4>");
-                        newDiv5Nested[i].text(data.posts[i].title);
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
 
-                        newDiv6Nested[i] = $("<a>");
-                        newDiv6Nested[i].attr("href", "#");
-                        newDiv6Nested[i].addClass("btn btn-info btn-xs");
-                        newDiv6Nested[i].attr("role”, “button");
-                        newDiv6Nested[i].attr("data-toggle", "modal");
-                        newDiv6Nested[i].attr("data-target", "#modalDetails");
-                        newDiv6Nested[i].text("Details");
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
 
-                        newDiv[i].append(newDiv2Nested[i]);
-                        newDiv2Nested[i].append(newDiv3Nested[i]);
-                        newDiv2Nested[i].append(newDiv4Nested[i]);
-                        newDiv4Nested[i].append(newDiv5Nested[i]);
-                        newDiv4Nested[i].append(newDiv6Nested[i]);
+                        // Add the activity details info to the detail button
+
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+
 
 
                         switch (cat) {
                             case "sports":
-                                $(".sports").append(newDiv[i]);
+                                $(".sports").append(newDiv);
                                 break;
 
                             case "entertainment":
-                                $(".entertainment").append(newDiv[i]);
+                                $(".entertainment").append(newDiv);
                                 break;
 
                             case "food":
-                                $(".food").append(newDiv[i]);
+                                $(".food").append(newDiv);
                                 break;
 
                             case "miscellaneous":
-                                $(".miscellaneous").append(newDiv[i]);
+                                $(".miscellaneous").append(newDiv);
                                 break;
                         }
                     }
                 }
             });
 
+            // accept button on-click (each card will have unique data attr id)
+            // sequelize put function (using data attr id)
+            $("#acceptBtn").on("click", function (event) {
+                event.preventDefault();
+
+                if (confirm("Are you sure you want to accept this activity?")) {
+                    var acceptData = {
+                        authorization: window.localStorage.getItem("token"),
+                        activityID: $(this).attr("data-id")
+                    }
+                    $.ajax({
+                        url: "/api/post/accept",
+                        type: 'PUT',
+                        data: acceptData,
+                        success: function () {
+                            alert("Accepting post...");
+                            window.location.href = "/home";
+                        }
+                    });
+                }
+
+            })
 
             // allows user to sign out...deletes token and redirects to login
             $("#signOut").on("click", function() {
