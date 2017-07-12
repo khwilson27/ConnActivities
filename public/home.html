@@ -6,8 +6,7 @@
     <title>ConnActivities | Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
@@ -28,7 +27,9 @@
                 <li><a href="/home">Home</a></li>
                 <li><a href="/my-posts">My Posts</a></li>
                 <li><a id="signOut">Sign Out</a></li>
-                <li><a id="username"></a></li>
+                <li>
+                    <a id="username"></a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -39,8 +40,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Sports</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body sports">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -66,7 +67,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -75,8 +76,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Entertainment</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body entertainment">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -102,7 +103,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -113,8 +114,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Food</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body food">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -140,7 +141,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -149,8 +150,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Miscellaneous</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-4">
+                    <div class="panel-body miscellaneous">
+                        <!--<div class="col-md-4">
                             <div class="thumbnail">
                                 <img src="http://placehold.it/500x250/EEE" alt="image">
                                 <div class="caption">
@@ -176,7 +177,7 @@
                                     <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -214,28 +215,125 @@
     <!-- END DETAILS MODAL -->
 
 
-    <script>
-        $(document).ready(function () {
+    <script type="text/javascript">
+        // function runLoop(arr) {
+        //     for (var i = 0; i < arr.length; i++) {
+        //         console.log(data.posts[i].category);
+        // console.log(arr[i].category);
+
+
+        // Create the HTML Well (Section) and Add the table content for each reserved table
+        // var title = arr[i].title;
+        // var nullPost = $("div>");
+        // nullPost.addClass("thumbnail");
+
+        // nullPost.attr("src", "http://placehold.it/500x250/EEE");
+
+        // switch (cat) {
+        //     case "sports":
+        //         $("#sports").text(title);
+        //         break;
+
+        //     case "entertainment":
+        //         $("#entertainment").text(title);
+        //         break;
+
+        //     case "food":
+        //         $("#food").text(title);
+        //         break;
+
+        //     case "miscellaneous":
+        //         $("#miscellaneous").text(title);
+        //         break;
+        // }
+
+
+        //     }
+
+        // }
+        $(document).ready(function() {
 
             $.ajax({
                 url: "/api/post",
                 type: 'GET',
                 // Fetch the stored token from localStorage and set in the header
-                headers: { "Authorization": localStorage.getItem('token') },
-                success: function (data) {
+                headers: {
+                    "Authorization": localStorage.getItem('token')
+                },
+                success: function(data) {
                     console.log("success!");
                     console.log(data);
-
+                    console.log(data.posts[0].category);
                     if (data.username) {
                         $("#username").text(data.username);
                     }
+                    for (var i = 0; i < data.posts.length; i++) {
 
+                        console.log(data.posts[i].category);
+                        var cat = data.posts[i].category;
+
+                        var newDiv = [];
+                        var newDiv2Nested = [];
+                        var newDiv3Nested = [];
+                        var newDiv4Nested = [];
+                        var newDiv5Nested = [];
+                        var newDiv6Nested = [];
+
+                        newDiv[i] = $("<div>");
+                        newDiv[i].addClass("col-md-4");
+
+                        newDiv2Nested[i] = $("<div>");
+                        newDiv2Nested[i].addClass("thumbnail");
+
+                        newDiv3Nested[i] = $("<img>");
+                        newDiv3Nested[i].attr("src", "http://placehold.it/500x250/EEE");
+
+
+                        newDiv4Nested[i] = $("<div>");
+                        newDiv4Nested[i].addClass("caption");
+
+                        newDiv5Nested[i] = $("<h4>");
+                        newDiv5Nested[i].text(data.posts[i].title);
+
+                        newDiv6Nested[i] = $("<a>");
+                        newDiv6Nested[i].attr("href", "#");
+                        newDiv6Nested[i].addClass("btn btn-info btn-xs");
+                        newDiv6Nested[i].attr("role”, “button");
+                        newDiv6Nested[i].attr("data-toggle", "modal");
+                        newDiv6Nested[i].attr("data-target", "#modalDetails");
+                        newDiv6Nested[i].text("Details");
+
+                        newDiv[i].append(newDiv2Nested[i]);
+                        newDiv2Nested[i].append(newDiv3Nested[i]);
+                        newDiv2Nested[i].append(newDiv4Nested[i]);
+                        newDiv4Nested[i].append(newDiv5Nested[i]);
+                        newDiv4Nested[i].append(newDiv6Nested[i]);
+
+
+                        switch (cat) {
+                            case "sports":
+                                $(".sports").append(newDiv[i]);
+                                break;
+
+                            case "entertainment":
+                                $(".entertainment").append(newDiv[i]);
+                                break;
+
+                            case "food":
+                                $(".food").append(newDiv[i]);
+                                break;
+
+                            case "miscellaneous":
+                                $(".miscellaneous").append(newDiv[i]);
+                                break;
+                        }
+                    }
                 }
             });
 
 
             // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function () {
+            $("#signOut").on("click", function() {
                 window.localStorage.removeItem("token");
                 window.location.href = "/sign-in";
             });
