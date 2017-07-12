@@ -6,8 +6,7 @@
     <title>ConnActivities | Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
@@ -217,6 +216,7 @@
 
 
     <script type="text/javascript">
+
         $(document).ready(function () {
 
             $.ajax({
@@ -232,6 +232,7 @@
                     // console.log(data.posts[0].category);
 
                     // add username to navbar if logged in, and 'sign-in' if not
+
                     if (data.username) {
                         $("#username").text(data.username);
                     } else {
@@ -284,6 +285,7 @@
                         newDiv4Nested.append(newDiv6Nested);
 
 
+
                         switch (cat) {
                             case "sports":
                                 $(".sports").append(newDiv);
@@ -329,7 +331,7 @@
             })
 
             // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function () {
+            $("#signOut").on("click", function() {
                 window.localStorage.removeItem("token");
                 window.location.href = "/sign-in";
             });

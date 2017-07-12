@@ -6,14 +6,13 @@
     <title>ConnActivities | My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-        .thumbnail {
-            padding: 0;
-        }
+    .thumbnail {
+        padding: 0;
+    }
     </style>
 </head>
 
@@ -218,15 +217,14 @@
         </div>
     </div>
     <!-- END CREATE POST MODAL -->
-
     <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function() {
 
-            console.log(window.localStorage);
+        console.log(window.localStorage);
 
-            // check if token exists using .getItem method
-            // run GET ajax call if token exists
-            if (window.localStorage.getItem("token")) {
+        // check if token exists using .getItem method
+        // run GET ajax call if token exists
+        if (window.localStorage.getItem("token")) {
 
                 // API call to retrieve posts that user has created
                 $.ajax({
@@ -266,68 +264,70 @@
             //     window.location.href = "/sign-in";
             // }
 
-            // allows user to create post...grabs values from form
-            $("#createPost").on("click", function (event) {
-                event.preventDefault();
+
+        // allows user to create post...grabs values from form
+        $("#createPost").on("click", function(event) {
+            event.preventDefault();
+
 
                 // if token does not exists, user not logged-in
                 if (!window.localStorage.getItem("token")) {
                     alert("You need to be signed in!");
                     window.location.href = "/sign-in";
                     // if token exists, they are logged-in and assign form data to newPost 
-                } else {
-                    var newPost = {
-                        title: $("#title").val().trim(),
-                        category: $("#category").val().trim(),
-                        address: $("#address").val().trim(),
-                        time: $("#time").val().trim(),
-                        description: $("#description").val().trim(),
-                        authorization: window.localStorage.getItem("token")
-                    };
+            } else {
+                var newPost = {
+                    title: $("#title").val().trim(),
+                    category: $("#category").val().trim(),
+                    address: $("#address").val().trim(),
+                    time: $("#time").val().trim(),
+                    description: $("#description").val().trim(),
+                    authorization: window.localStorage.getItem("token")
+                };
 
-                    console.log(newPost);
+                console.log(newPost);
 
-                    // query DB to add data from newPort object
-                    $.post("/api/post", newPost)
-                        .done(function (data) {
-                            console.log(data);
-                            alert("Adding post...");
-                            window.location.href = "/my-posts";
-                        });
-                }
-
-            });
-
-            // delete button on-click (each card will have unique data attr id)
-            // sequelize delete function (using data attr id)
-            $("#delete").on("click", function (event) {
-                event.preventDefault();
-
-                if (confirm("Are you sure you want to delete?")) {
-                    // console.log("deleted");
-                    var deleteData = {
-                        authorization: window.localStorage.getItem("token"),
-                        activityID: $(this).attr("data-id")
-                    }
-                    $.ajax({
-                        url: "/api/my-activities/",
-                        type: 'DELETE',
-                        data: deleteData,
-                        success: function () {
-                            alert("Deleting post...");
-                            window.location.href = "/my-posts";
-                        }
+                // query DB to add data from newPort object
+                $.post("/api/post", newPost)
+                    .done(function(data) {
+                        console.log(data);
+                        alert("Adding post...");
+                        window.location.href = "/my-posts";
                     });
+            }
+
+        });
+
+        // delete button on-click (each card will have unique data attr id)
+        // sequelize delete function (using data attr id)
+        $("#delete").on("click", function(event) {
+            event.preventDefault();
+
+            if (confirm("Are you sure you want to delete?")) {
+                // console.log("deleted");
+                var deleteData = {
+                    authorization: window.localStorage.getItem("token"),
+                    activityID: $(this).attr("data-id")
                 }
+                $.ajax({
+                    url: "/api/my-activities/",
+                    type: 'DELETE',
+                    data: deleteData,
+                    success: function() {
+                        alert("Deleting post...");
+                        window.location.href = "/my-posts";
+                    }
+                });
+            }
 
-            })
-
-            // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function () {
-                window.localStorage.removeItem("token");
-                window.location.href = "/sign-in";
-            });
         })
+
+        // allows user to sign out...deletes token and redirects to login
+        $("#signOut").on("click", function() {
+            window.localStorage.removeItem("token");
+            window.location.href = "/sign-in";
+        });
+    })
     </script>
 </body>
 
