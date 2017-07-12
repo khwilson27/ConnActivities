@@ -159,7 +159,7 @@ module.exports = function (app) {
             username: decoded.username,
             posts: dbPost
           }
-          res.json(dbPost);
+          res.json(data);
         });
       };
     });
@@ -201,12 +201,37 @@ module.exports = function (app) {
 
 
   // deletes post
-  app.delete("/api/my-activities/:id", function (req, res) {
-    db.User.destroy({
-      where: { id: req.params.id }
-    }).then(function () {
-      res.redirect('/my-activities');
+  app.delete("/api/my-activities/", function (req, res) {
+    
+    var token = req.body.authorization;
+
+    // Checks to see if it's expired
+    jwt.verify(token, 'secretWord', function (err, decoded) {
+      if (err) {
+        /*
+          err = {
+            name: 'TokenExpiredError',
+            message: 'jwt expired',
+            expiredAt: 1408621000
+          }
+        */
+        console.error(err);
+      } else {
+
+        // find all of the posts to this user
+        db.Post.destroy({
+          where: { id: req.body.activityID },
+        }).then(function () {
+          res.end("Activity deleted");
+        });
+      };
     });
+
+    // db.User.destroy({
+    //   where: { id: req.params.id }
+    // }).then(function () {
+    //   res.redirect('/my-activities');
+    // });
   });
 
   // removes User from activity
