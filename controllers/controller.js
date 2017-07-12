@@ -159,7 +159,7 @@ module.exports = function (app) {
             username: decoded.username,
             posts: dbPost
           }
-          res.json(dbPost);
+          res.json(data);
         });
       };
     });
