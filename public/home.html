@@ -265,7 +265,7 @@
                         newDiv4Nested.addClass("caption");
 
                         newDiv5Nested = $("<h4>");
-                        newDiv5Nested.text(data.posts[i].title);
+                        newDiv5Nested.text(data.posts[i].title.substring(0,8) + "...");
 
                         newDiv6Nested = $("<a>");
                         newDiv6Nested.attr("href", "#");
