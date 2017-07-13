@@ -91,35 +91,38 @@
                     </div>
                     <div class="row">
                         <div class="panel-body">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE" alt="image">
-                                    <div class="caption">
-                                        <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" data-id="2" role="button">Cancel</a>
+
+                            <div id="attending"> 
+                                <!-- <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="http://placehold.it/500x250/EEE" alt="image">
+                                        <div class="caption">
+                                            <h4>Activity</h4>
+                                            <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                            <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE" alt="image">
-                                    <div class="caption">
-                                        <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="http://placehold.it/500x250/EEE" alt="image">
+                                        <div class="caption">
+                                            <h4>Activity</h4>
+                                            <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                            <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE" alt="image">
-                                    <div class="caption">
-                                        <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="http://placehold.it/500x250/EEE" alt="image">
+                                        <div class="caption">
+                                            <h4>Activity</h4>
+                                            <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                            <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                        </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -262,6 +265,87 @@
                         console.log(data);
 
                         // Build activity cards that user has joined here
+                    for (var i = 0; i < data.posts.length; i++) {
+
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
+                        var newDiv7Nested;
+
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-3");
+
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
+
+                        newDiv3Nested = $("<img>");
+                        newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+
+
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
+
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
+
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
+
+                        newDiv7Nested = $("<a>");
+                        newDiv7Nested.attr("href", "#");
+                        newDiv7Nested.addClass("btn btn-danger btn-xs pull-right");
+                        newDiv7Nested.attr("role”, “button");
+                        newDiv7Nested.text("Cancel");
+
+                        // Add the activity details info to the detail button
+                        newDiv6Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested.attr("data-title", data.posts[i].title);
+                        newDiv6Nested.attr("data-description", data.posts[i].description);
+                        newDiv6Nested.attr("data-address", data.posts[i].address);
+                        newDiv6Nested.attr("data-category", data.posts[i].category);
+                        newDiv6Nested.attr("data-time", data.posts[i].time);
+                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+                        newDiv4Nested.append(newDiv7Nested);
+
+                        $("#attending").append(newDiv);
+
+                        // append the div to the correct box depending on category
+                        // switch (data.posts[i].category) {
+                        //     case "sports":
+                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                        //         $(".sports").append(newDiv);
+                        //         break;
+
+                        //     case "entertainment":
+                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                        //         $(".entertainment").append(newDiv);
+                        //         break;
+
+                        //     case "food":
+                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                        //         $(".food").append(newDiv);
+                        //         break;
+
+                        //     case "miscellaneous":
+                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                        //         $(".miscellaneous").append(newDiv);
+                        //         break;
+                        // }
+                        }
                     }
                 });
             }
