@@ -356,7 +356,7 @@
                 $("#detail-description").text($(this).data("description"));
                 $("#detail-time").text($(this).data("time"));
                 $("#detail-address").text($(this).data("address"));
-                $("#detail-category").text($(this).data("category").charAt(0).toUpperCase());
+                $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
                 $("#detail-time").text($(this).data("time"));
 
                 $("#acceptBtn").attr("data-id", $(this).data("id"));
