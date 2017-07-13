@@ -196,7 +196,11 @@
                     <p><strong>Category:</strong>
                         <div id="detail-category">categoryHere</div>
                     </p>
-                    <div id="detail-description">detailsHere</div>
+
+                    <p><strong>Description:</strong>
+                        <div id="detail-description">descriptionHere</div>
+                    </p>
+
                     <hr>
                     <p><strong>Address:</strong>
                         <div id="detail-address">addressHere</div>
@@ -344,18 +348,18 @@
             })
 
             // populate modal with info upon detail button click
-            $(".detailsModalBtn").on("click", function() {
+            $(document).on("click", ".detailsModalBtn", function () {
 
                 console.log("clicked modal");
 
-                $("#detail-title").text(this.attr("data-title"));
-                $("#detail-description").text(this.attr("data-description"));
-                $("#detail-time").text(this.attr("data-time"));
-                $("#detail-address").text(this.attr("data-address"));
-                $("#detail-category").text(this.attr("data-category"));
-                $("#detail-time").text(this.attr("data-time"));
+                $("#detail-title").text($(this).data("title"));
+                $("#detail-description").text($(this).data("description"));
+                $("#detail-time").text($(this).data("time"));
+                $("#detail-address").text($(this).data("address"));
+                $("#detail-category").text($(this).data("category").charAt(0).toUpperCase());
+                $("#detail-time").text($(this).data("time"));
 
-                $("#acceptBtn").attr("data-id", this.attr("data-id"));
+                $("#acceptBtn").attr("data-id", $(this).data("id"));
             })
 
             // allows user to sign out...deletes token and redirects to login

@@ -6,13 +6,14 @@
     <title>ConnActivities | My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <style>
-    .thumbnail {
-        padding: 0;
-    }
+        .thumbnail {
+            padding: 0;
+        }
     </style>
 </head>
 
@@ -129,32 +130,38 @@
         <!-- closes row div -->
     </div>
     <!-- closes container div -->
-    
+
     <!-- BEGIN DETAILS MODAL -->
     <div id="modalDetails" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="details-title"></h4>
+                    <h4 class="modal-title" id="detail-title">titleHere</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="details-description">
-                    </div>
+                    <p><strong>Category:</strong>
+                        <div id="detail-category">categoryHere</div>
+                    </p>
+
+                    <p><strong>Description:</strong>
+                        <div id="detail-description">descriptionHere</div>
+                    </p>
+
                     <hr>
                     <p><strong>Address:</strong>
-                        <div id="details-address"></div>
+                        <div id="detail-address">addressHere</div>
                     </p>
                     <p><strong>Time:</strong>
-                        <div id="details-time"></div>
+                        <div id="detail-time">timeHere</div>
                     </p>
-                    <p><strong>Posted by:</strong>
-                        <div id="details-posted-by"></div>
-                    </p>
+                    <!--<p><strong>Posted by:</strong>
+                        <div id="detail-posted-by"></div>
+                    </p>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn">Accept</button>
                 </div>
             </div>
         </div>
@@ -218,13 +225,13 @@
     </div>
     <!-- END CREATE POST MODAL -->
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function () {
 
-        console.log(window.localStorage);
+            console.log(window.localStorage);
 
-        // check if token exists using .getItem method
-        // run GET ajax call if token exists
-        if (window.localStorage.getItem("token")) {
+            // check if token exists using .getItem method
+            // run GET ajax call if token exists
+            if (window.localStorage.getItem("token")) {
 
                 // API call to retrieve posts that user has created
                 $.ajax({
@@ -240,6 +247,7 @@
                         $("#username").text(data.username);
 
                         // Build activity cards that user has created here 
+
                     }
                 });
 
@@ -265,9 +273,9 @@
             // }
 
 
-        // allows user to create post...grabs values from form
-        $("#createPost").on("click", function(event) {
-            event.preventDefault();
+            // allows user to create post...grabs values from form
+            $("#createPost").on("click", function (event) {
+                event.preventDefault();
 
 
                 // if token does not exists, user not logged-in
@@ -275,59 +283,74 @@
                     alert("You need to be signed in!");
                     window.location.href = "/sign-in";
                     // if token exists, they are logged-in and assign form data to newPost 
-            } else {
-                var newPost = {
-                    title: $("#title").val().trim(),
-                    category: $("#category").val().trim(),
-                    address: $("#address").val().trim(),
-                    time: $("#time").val().trim(),
-                    description: $("#description").val().trim(),
-                    authorization: window.localStorage.getItem("token")
-                };
+                } else {
+                    var newPost = {
+                        title: $("#title").val().trim(),
+                        category: $("#category").val().trim(),
+                        address: $("#address").val().trim(),
+                        time: $("#time").val().trim(),
+                        description: $("#description").val().trim(),
+                        authorization: window.localStorage.getItem("token")
+                    };
 
-                console.log(newPost);
+                    console.log(newPost);
 
-                // query DB to add data from newPort object
-                $.post("/api/post", newPost)
-                    .done(function(data) {
-                        console.log(data);
-                        alert("Adding post...");
-                        window.location.href = "/my-posts";
-                    });
-            }
-
-        });
-
-        // delete button on-click (each card will have unique data attr id)
-        // sequelize delete function (using data attr id)
-        $("#delete").on("click", function(event) {
-            event.preventDefault();
-
-            if (confirm("Are you sure you want to delete?")) {
-                // console.log("deleted");
-                var deleteData = {
-                    authorization: window.localStorage.getItem("token"),
-                    activityID: $(this).attr("data-id")
+                    // query DB to add data from newPort object
+                    $.post("/api/post", newPost)
+                        .done(function (data) {
+                            console.log(data);
+                            alert("Adding post...");
+                            window.location.href = "/my-posts";
+                        });
                 }
-                $.ajax({
-                    url: "/api/my-activities/",
-                    type: 'DELETE',
-                    data: deleteData,
-                    success: function() {
-                        alert("Deleting post...");
-                        window.location.href = "/my-posts";
+
+            });
+
+            // delete button on-click (each card will have unique data attr id)
+            // sequelize delete function (using data attr id)
+            $(document).on("click", "#delete", function (event) {
+                event.preventDefault();
+
+                if (confirm("Are you sure you want to delete?")) {
+                    // console.log("deleted");
+                    var deleteData = {
+                        authorization: window.localStorage.getItem("token"),
+                        activityID: $(this).attr("data-id")
                     }
-                });
-            }
+                    $.ajax({
+                        url: "/api/my-activities/",
+                        type: 'DELETE',
+                        data: deleteData,
+                        success: function () {
+                            alert("Deleting post...");
+                            window.location.href = "/my-posts";
+                        }
+                    });
+                }
 
+            })
+
+            // populate modal with info upon detail button click
+            $(document).on("click", ".detailsModalBtn", function () {
+
+                console.log("clicked modal");
+
+                $("#detail-title").text($(this).data("title"));
+                $("#detail-description").text($(this).data("description"));
+                $("#detail-time").text($(this).data("time"));
+                $("#detail-address").text($(this).data("address"));
+                $("#detail-category").text($(this).data("category").charAt(0).toUpperCase());
+                $("#detail-time").text($(this).data("time"));
+
+                // $("#acceptBtn").attr("data-id", $(this).data("id"));
+            })
+
+            // allows user to sign out...deletes token and redirects to login
+            $("#signOut").on("click", function () {
+                window.localStorage.removeItem("token");
+                window.location.href = "/sign-in";
+            });
         })
-
-        // allows user to sign out...deletes token and redirects to login
-        $("#signOut").on("click", function() {
-            window.localStorage.removeItem("token");
-            window.location.href = "/sign-in";
-        });
-    })
     </script>
 </body>
 
