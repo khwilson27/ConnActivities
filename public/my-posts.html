@@ -223,6 +223,7 @@
     </div>
     <!-- END CREATE POST MODAL -->
     <script type="text/javascript">
+
         $(document).ready(function () {
 
             console.log(window.localStorage);
@@ -352,6 +353,10 @@
                         authorization: window.localStorage.getItem("token"),
                         activityID: $(this).attr("data-id")
                     }
+                }
+            })
+        }) // closes document.ready fn
+                
 
     </script>
 </body>
