@@ -190,25 +190,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="title"></h4>
+                    <h4 class="modal-title" id="detail-title">titleHere</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="description">
-                    </div>
+                    <p><strong>Category:</strong>
+                        <div id="detail-category">categoryHere</div>
+                    </p>
+                    <div id="detail-description">detailsHere</div>
                     <hr>
                     <p><strong>Address:</strong>
-                        <div id="address"></div>
+                        <div id="detail-address">addressHere</div>
                     </p>
                     <p><strong>Time:</strong>
-                        <div id="time"></div>
+                        <div id="detail-time">timeHere</div>
                     </p>
-                    <p><strong>Posted by:</strong>
-                        <div id="posted-by"></div>
-                    </p>
+                    <!--<p><strong>Posted by:</strong>
+                        <div id="detail-posted-by"></div>
+                    </p>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn" data-id="3">Accept</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn">Accept</button>
                 </div>
             </div>
         </div>
@@ -227,9 +229,7 @@
                     "Authorization": localStorage.getItem('token')
                 },
                 success: function (data) {
-                    console.log("success!");
-                    // console.log(data);
-                    // console.log(data.posts[0].category);
+                    // console.log("success!");
 
                     // add username to navbar if logged in, and 'sign-in' if not
 
@@ -241,9 +241,6 @@
                     }
 
                     for (var i = 0; i < data.posts.length; i++) {
-
-                        console.log(data.posts[i].category);
-                        var cat = data.posts[i].category;
 
                         var newDiv;
                         var newDiv2Nested;
@@ -259,8 +256,6 @@
                         newDiv2Nested.addClass("thumbnail");
 
                         newDiv3Nested = $("<img>");
-                        newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
-
 
                         newDiv4Nested = $("<div>");
                         newDiv4Nested.addClass("caption");
@@ -270,13 +265,20 @@
 
                         newDiv6Nested = $("<a>");
                         newDiv6Nested.attr("href", "#");
-                        newDiv6Nested.addClass("btn btn-info btn-xs");
+                        newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
                         newDiv6Nested.attr("role”, “button");
                         newDiv6Nested.attr("data-toggle", "modal");
                         newDiv6Nested.attr("data-target", "#modalDetails");
                         newDiv6Nested.text("Details");
 
                         // Add the activity details info to the detail button
+                        newDiv6Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested.attr("data-title", data.posts[i].title);
+                        newDiv6Nested.attr("data-description", data.posts[i].description);
+                        newDiv6Nested.attr("data-address", data.posts[i].address);
+                        newDiv6Nested.attr("data-category", data.posts[i].category);
+                        newDiv6Nested.attr("data-time", data.posts[i].time);
+                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
 
                         newDiv.append(newDiv2Nested);
                         newDiv2Nested.append(newDiv3Nested);
@@ -284,22 +286,25 @@
                         newDiv4Nested.append(newDiv5Nested);
                         newDiv4Nested.append(newDiv6Nested);
 
-
-
-                        switch (cat) {
+                        // append the div to the correct box depending on category
+                        switch (data.posts[i].category) {
                             case "sports":
+                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
                                 $(".sports").append(newDiv);
                                 break;
 
                             case "entertainment":
+                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
                                 $(".entertainment").append(newDiv);
                                 break;
 
                             case "food":
+                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
                                 $(".food").append(newDiv);
                                 break;
 
                             case "miscellaneous":
+                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
                                 $(".miscellaneous").append(newDiv);
                                 break;
                         }
@@ -336,8 +341,21 @@
                 } else {
                     alert("You must be logged in!");
                 }
+            })
 
+            // populate modal with info upon detail button click
+            $(".detailsModalBtn").on("click", function() {
 
+                console.log("clicked modal");
+
+                $("#detail-title").text(this.attr("data-title"));
+                $("#detail-description").text(this.attr("data-description"));
+                $("#detail-time").text(this.attr("data-time"));
+                $("#detail-address").text(this.attr("data-address"));
+                $("#detail-category").text(this.attr("data-category"));
+                $("#detail-time").text(this.attr("data-time"));
+
+                $("#acceptBtn").attr("data-id", this.attr("data-id"));
             })
 
             // allows user to sign out...deletes token and redirects to login

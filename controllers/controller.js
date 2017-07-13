@@ -51,10 +51,10 @@ module.exports = function (app) {
       email: req.body.email,
       password: hash,
       salt: salt
-    }).resolve(function () {
+    }).then(function () {
       res.end("Registration complete!");
-    }).catch(function(err){
-      res.error(err);
+    }).catch(function (err) {
+      res.send(err);
     });
   });
 
@@ -304,10 +304,11 @@ module.exports = function (app) {
         // update post partnerId to user
         db.Post.update(
           { partnerId: decoded.id },
-          { where: { id: req.body.activityID } 
-        }).then(function () {
-          res.end("Activity joined!");
-        });
+          {
+            where: { id: req.body.activityID }
+          }).then(function () {
+            res.end("Activity joined!");
+          });
 
       }; // closes else
     }) //closes jwt.verify
