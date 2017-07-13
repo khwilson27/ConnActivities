@@ -48,8 +48,8 @@
                         <h3 class="panel-title">My Posts</h3>
                     </div>
                     <div class="row">
-                        <div class="panel-body">
-                            <div class="col-md-3">
+                        <div class="panel-body myPosts">
+                            <!--<div class="col-md-3">
                                 <div class="thumbnail">
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
@@ -78,7 +78,7 @@
                                         <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <!-- closes row div -->
@@ -92,7 +92,7 @@
                     <div class="row">
                         <div class="panel-body">
 
-                            <div id="attending"> 
+                            <div id="attending">
                                 <!-- <div class="col-md-3">
                                     <div class="thumbnail">
                                         <img src="http://placehold.it/500x250/EEE" alt="image">
@@ -247,7 +247,90 @@
                         console.log(data);
                         $("#username").text(data.username);
 
-                        // Build activity cards that user has created here 
+                        // Build activity cards that user has created here
+                        for (var i = 0; i < data.posts.length; i++) {
+                            // console.log(data.posts[i].category);
+                            // var cat = data.posts[i].category;
+                            var newDiv;
+                            var newDiv2Nested;
+                            var newDiv3Nested;
+                            var newDiv4Nested;
+                            var newDiv5Nested;
+                            var newDiv6Nested;
+                            var newDiv7Nested;
+                            var newDiv8Nested;
+
+                            newDiv = $("<div>");
+                            newDiv.addClass("col-md-3");
+
+                            newDiv2Nested = $("<div>");
+                            newDiv2Nested.addClass("thumbnail");
+
+                            newDiv3Nested = $("<img>");
+
+                            newDiv4Nested = $("<div>");
+                            newDiv4Nested.addClass("caption");
+
+                            newDiv5Nested = $("<h4>");
+                            newDiv5Nested.text(data.posts[i].title);
+
+                            newDiv6Nested = $("<a>");
+                            newDiv6Nested.attr("href", "#");
+                            newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
+                            newDiv6Nested.attr("role”, “button");
+                            newDiv6Nested.attr("data-toggle", "modal");
+                            newDiv6Nested.attr("data-target", "#modalDetails");
+                            newDiv6Nested.text("Details");
+
+                            // Add the activity details info to the detail button
+                            newDiv6Nested.attr("data-id", data.posts[i].id);
+                            newDiv6Nested.attr("data-title", data.posts[i].title);
+                            newDiv6Nested.attr("data-description", data.posts[i].description);
+                            newDiv6Nested.attr("data-address", data.posts[i].address);
+                            newDiv6Nested.attr("data-category", data.posts[i].category);
+                            newDiv6Nested.attr("data-time", data.posts[i].time);
+                            newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+
+                            newDiv7Nested = $("<a>");
+                            newDiv7Nested.attr("href", "#");
+                            newDiv7Nested.addClass("btn btn-danger btn-xs pull-right delete");
+                            newDiv7Nested.attr("data-id", data.posts[i].id);
+                            newDiv7Nested.attr("data-id", );
+                            newDiv7Nested.attr("role", "button");
+
+                            newDiv8Nested = $("<i>");
+                            newDiv8Nested.addClass("fa fa-trash-o");
+                            newDiv8Nested.attr("aria-hidden", "true");
+
+                            newDiv.append(newDiv2Nested);
+                            newDiv2Nested.append(newDiv3Nested);
+                            newDiv2Nested.append(newDiv4Nested);
+                            newDiv4Nested.append(newDiv5Nested);
+                            newDiv4Nested.append(newDiv6Nested);
+                            newDiv4Nested.append(newDiv7Nested);
+                            newDiv7Nested.append(newDiv8Nested);
+
+                            $(".myPosts").append(newDiv);
+
+                            // add correct img link depending on category
+                            switch (data.posts[i].category) {
+                                case "sports":
+                                    newDiv3Nested.attr("src", "/assets/img/sports.jpg");
+                                    break;
+
+                                case "entertainment":
+                                    newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
+                                    break;
+
+                                case "food":
+                                    newDiv3Nested.attr("src", "/assets/img/food.jpg");
+                                    break;
+
+                                case "miscellaneous":
+                                    newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
+                                    break;
+                            }
+                        }
 
                     }
                 });
@@ -265,86 +348,81 @@
                         console.log(data);
 
                         // Build activity cards that user has joined here
-                    for (var i = 0; i < data.posts.length; i++) {
+                        for (var i = 0; i < data.posts.length; i++) {
 
-                        var newDiv;
-                        var newDiv2Nested;
-                        var newDiv3Nested;
-                        var newDiv4Nested;
-                        var newDiv5Nested;
-                        var newDiv6Nested;
-                        var newDiv7Nested;
+                            var newDiv;
+                            var newDiv2Nested;
+                            var newDiv3Nested;
+                            var newDiv4Nested;
+                            var newDiv5Nested;
+                            var newDiv6Nested;
+                            var newDiv7Nested;
 
-                        newDiv = $("<div>");
-                        newDiv.addClass("col-md-3");
+                            newDiv = $("<div>");
+                            newDiv.addClass("col-md-3");
 
-                        newDiv2Nested = $("<div>");
-                        newDiv2Nested.addClass("thumbnail");
+                            newDiv2Nested = $("<div>");
+                            newDiv2Nested.addClass("thumbnail");
 
-                        newDiv3Nested = $("<img>");
-                        newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                            newDiv3Nested = $("<img>");
 
+                            newDiv4Nested = $("<div>");
+                            newDiv4Nested.addClass("caption");
 
-                        newDiv4Nested = $("<div>");
-                        newDiv4Nested.addClass("caption");
+                            newDiv5Nested = $("<h4>");
+                            newDiv5Nested.text(data.posts[i].title);
 
-                        newDiv5Nested = $("<h4>");
-                        newDiv5Nested.text(data.posts[i].title);
+                            newDiv6Nested = $("<a>");
+                            newDiv6Nested.attr("href", "#");
+                            newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
+                            newDiv6Nested.attr("role”, “button");
+                            newDiv6Nested.attr("data-toggle", "modal");
+                            newDiv6Nested.attr("data-target", "#modalDetails");
+                            newDiv6Nested.text("Details");
 
-                        newDiv6Nested = $("<a>");
-                        newDiv6Nested.attr("href", "#");
-                        newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
-                        newDiv6Nested.attr("role”, “button");
-                        newDiv6Nested.attr("data-toggle", "modal");
-                        newDiv6Nested.attr("data-target", "#modalDetails");
-                        newDiv6Nested.text("Details");
+                            newDiv7Nested = $("<a>");
+                            newDiv7Nested.attr("href", "#");
+                            newDiv7Nested.addClass("btn btn-danger btn-xs pull-right cancelBtn");
+                            newDiv7Nested.attr("role”, “button");
+                            newDiv7Nested.text("Cancel");
+                            newDiv7Nested.attr("data-id", data.posts[i].id);
 
-                        newDiv7Nested = $("<a>");
-                        newDiv7Nested.attr("href", "#");
-                        newDiv7Nested.addClass("btn btn-danger btn-xs pull-right");
-                        newDiv7Nested.attr("role”, “button");
-                        newDiv7Nested.text("Cancel");
+                            // Add the activity details info to the detail button
+                            newDiv6Nested.attr("data-id", data.posts[i].id);
+                            newDiv6Nested.attr("data-title", data.posts[i].title);
+                            newDiv6Nested.attr("data-description", data.posts[i].description);
+                            newDiv6Nested.attr("data-address", data.posts[i].address);
+                            newDiv6Nested.attr("data-category", data.posts[i].category);
+                            newDiv6Nested.attr("data-time", data.posts[i].time);
+                            newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
 
-                        // Add the activity details info to the detail button
-                        newDiv6Nested.attr("data-id", data.posts[i].id);
-                        newDiv6Nested.attr("data-title", data.posts[i].title);
-                        newDiv6Nested.attr("data-description", data.posts[i].description);
-                        newDiv6Nested.attr("data-address", data.posts[i].address);
-                        newDiv6Nested.attr("data-category", data.posts[i].category);
-                        newDiv6Nested.attr("data-time", data.posts[i].time);
-                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                            newDiv.append(newDiv2Nested);
+                            newDiv2Nested.append(newDiv3Nested);
+                            newDiv2Nested.append(newDiv4Nested);
+                            newDiv4Nested.append(newDiv5Nested);
+                            newDiv4Nested.append(newDiv6Nested);
+                            newDiv4Nested.append(newDiv7Nested);
 
-                        newDiv.append(newDiv2Nested);
-                        newDiv2Nested.append(newDiv3Nested);
-                        newDiv2Nested.append(newDiv4Nested);
-                        newDiv4Nested.append(newDiv5Nested);
-                        newDiv4Nested.append(newDiv6Nested);
-                        newDiv4Nested.append(newDiv7Nested);
+                            $("#attending").append(newDiv);
 
-                        $("#attending").append(newDiv);
+                            // add correct img link depending on category
+                            switch (data.posts[i].category) {
+                                case "sports":
+                                    newDiv3Nested.attr("src", "/assets/img/sports.jpg");
+                                    break;
 
-                        // append the div to the correct box depending on category
-                        // switch (data.posts[i].category) {
-                        //     case "sports":
-                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
-                        //         $(".sports").append(newDiv);
-                        //         break;
+                                case "entertainment":
+                                    newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
+                                    break;
 
-                        //     case "entertainment":
-                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
-                        //         $(".entertainment").append(newDiv);
-                        //         break;
+                                case "food":
+                                    newDiv3Nested.attr("src", "/assets/img/food.jpg");
+                                    break;
 
-                        //     case "food":
-                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
-                        //         $(".food").append(newDiv);
-                        //         break;
-
-                        //     case "miscellaneous":
-                        //         newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
-                        //         $(".miscellaneous").append(newDiv);
-                        //         break;
-                        // }
+                                case "miscellaneous":
+                                    newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
+                                    break;
+                            }
                         }
                     }
                 });
@@ -390,7 +468,7 @@
 
             // delete button on-click (each card will have unique data attr id)
             // sequelize delete function (using data attr id)
-            $(document).on("click", "#delete", function (event) {
+            $(document).on("click", ".delete", function (event) {
                 event.preventDefault();
 
                 if (confirm("Are you sure you want to delete?")) {
@@ -428,7 +506,7 @@
             })
 
             // if cancel button clicked, then update post partnerID = null
-            $("#cancel").on("click", function (event) {
+            $(document).on("click", ".cancelBtn", function (event) {
                 event.preventDefault();
                 if (confirm("Are you sure you want to cancel?")) {
                     var cancelUser = {
@@ -446,6 +524,7 @@
                     });
                 }
             });
+
             // allows user to sign out...deletes token and redirects to login
             $("#signOut").on("click", function () {
                 window.localStorage.removeItem("token");
