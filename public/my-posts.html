@@ -130,7 +130,6 @@
         <!-- closes row div -->
     </div>
     <!-- closes container div -->
-
     <!-- BEGIN DETAILS MODAL -->
     <div id="modalDetails" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -161,7 +160,6 @@
         </div>
     </div>
     <!-- END DETAILS MODAL -->
-
     <!-- BEGIN CREATE POST MODAL -->
     <div id="modalCreate" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -333,24 +331,6 @@
                         activityID: $(this).attr("data-id")
                     }
 
-                    $.ajax({
-                        url: "/api/post",
-                        type: "PUT",
-                        data: cancelUser,
-                        success: function () {
-                            alert("Cancelling attendance...");
-                            window.location.href = "/my-posts";
-                        }
-                    });
-                }
-            });
-
-            // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function () {
-                window.localStorage.removeItem("token");
-                window.location.href = "/sign-in";
-            });
-        })
     </script>
 </body>
 
