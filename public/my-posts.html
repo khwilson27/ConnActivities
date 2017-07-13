@@ -345,6 +345,28 @@
                 // $("#acceptBtn").attr("data-id", $(this).data("id"));
             })
 
+            // if cancel button clicked, then update post partnerID = null
+            $("#cancel").on("click", function (event) {
+                event.preventDefault();
+
+                if (confirm("Are you sure you want to cancel?")) {
+                    var cancelUser = {
+                        authorization: window.localStorage.getItem("token"),
+                        activityID: $(this).attr("data-id")
+                    }
+
+                    $.ajax({
+                        url: "/api/post",
+                        type: "PUT",
+                        data: cancelUser,
+                        success: function () {
+                            alert("Cancelling attendance...");
+                            window.location.href = "/my-posts";
+                        }
+                    });
+                }
+            });
+
             // allows user to sign out...deletes token and redirects to login
             $("#signOut").on("click", function () {
                 window.localStorage.removeItem("token");
