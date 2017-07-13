@@ -51,8 +51,10 @@ module.exports = function (app) {
       email: req.body.email,
       password: hash,
       salt: salt
-    }).then(function () {
+    }).resolve(function () {
       res.end("Registration complete!");
+    }).catch(function(err){
+      res.error(err);
     });
   });
 
@@ -296,6 +298,7 @@ module.exports = function (app) {
           }
         */
         console.error(err);
+        res.error(err);
       } else {
 
         // update post partnerId to user
