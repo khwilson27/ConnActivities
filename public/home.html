@@ -293,22 +293,22 @@
                         // append the div to the correct box depending on category
                         switch (data.posts[i].category) {
                             case "sports":
-                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                                newDiv3Nested.attr("src", "/assets/img/sports.jpg");
                                 $(".sports").append(newDiv);
                                 break;
 
                             case "entertainment":
-                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                                newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
                                 $(".entertainment").append(newDiv);
                                 break;
 
                             case "food":
-                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                                newDiv3Nested.attr("src", "/assets/img/food.jpg");
                                 $(".food").append(newDiv);
                                 break;
 
                             case "miscellaneous":
-                                newDiv3Nested.attr("src", "http://placehold.it/500x250/EEE");
+                                newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
                                 $(".miscellaneous").append(newDiv);
                                 break;
                         }
@@ -332,8 +332,8 @@
                             type: 'PUT',
                             data: acceptData,
                             success: function (err) {
-                                    alert("Accepting post...");
-                                    window.location.href = "/";
+                                alert("Accepting post...");
+                                window.location.href = "/";
                             }
                         });
                     }
