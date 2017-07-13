@@ -271,11 +271,11 @@ module.exports = function (app) {
 
   // removes User from activity
   app.put("/api/post", function (req, res) {
-    db.Post.update(
-      req.body,
-      {
+    db.Post.update({
+      partnerId: null,
+    }, {
         where: {
-          id: req.body.id
+          id: req.body.activityID
         }
       }).then(function (dbPost) {
         res.json(dbPost);
