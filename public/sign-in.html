@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/img/favicon/favicon.ico" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+</head>
+
+<body id="background">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <img src="assets/img/logo/ca-logo-wht.png" alt="ConnActivities logo" id="ca-logo" height="120" width="120">
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="text-center" id="logo">ConnActivities<sup>&reg;</sup></h1>
+        </div>
+        <div class="row">
+            <h2 class="text-center" id="tag-line">One Friend. One Adventure.</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"> <strong>Sign In</strong>
+                    </div>
+                    <div class="panel-body" id="panel-start">
+                        <form class="form-horizontal" id="signinForm">
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="inputEmail" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-sm-3 control-label label-name">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="inputPassword" required="">
+                                </div>
+                            </div>
+                            <div class="form-group last">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-primary btn-md" id="loginBtn">Sign In</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer text-center">Not Registered? <a href="/sign-up" class="">Sign Up here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer navbar-fixed-bottom">
+            <div class="container">
+                <p class="text-center">&copy; 2017 ConnActivities Co. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Begin of Alerts -->
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+        id="alertModalRed">
+        <div class="modal-dialog modal-sm">
+            <div class="alert alert-danger" role="alert">
+                <strong>Hold Up!</strong>
+                <p id="alertModalMessageRed">Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+        id="alertModalGreen">
+        <div class="modal-dialog modal-sm">
+            <div class="alert alert-danger" role="alert">
+                <strong>Well Done!</strong>
+                <p id="alertModalMessageGreen">Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+    <!-- End of Alerts -->
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        console.log(window.localStorage);
+
+            // allows user to create post...grabs values from form
+            $("#loginBtn").on("click", function (event) {
+                event.preventDefault();
+                var loginInputs = {
+                    email: $("#inputEmail").val().trim(),
+                    password: $("#inputPassword").val().trim(),
+                };
+
+                // sends form values to db
+                $.post("/api/login", loginInputs)
+                    .done(function (data) {
+                        if (!data.token) {
+                            $('#alertModalRed').modal('show');
+                            $("#alertModalMessageRed").text(data.message);
+                        } else {
+                            window.localStorage.setItem("token", data.token);
+                            window.location.href = "/";
+                        }
+
+                });
+        });
+    })
+    </script>
+</body>
+
+</html>
