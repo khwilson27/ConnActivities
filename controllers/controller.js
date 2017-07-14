@@ -229,7 +229,7 @@ module.exports = function (app) {
             expiredAt: 1408621000
           }
         */
-        console.error(err);
+        res.json({ error: err.message });
       } else {
         // console.log(decoded);
         var userId = decoded.id
@@ -319,7 +319,10 @@ module.exports = function (app) {
         } else {
           // update post partnerId to user
           db.Post.update(
-            { partnerId: decoded.id },
+            {
+              partnerId: decoded.id,
+              partnerUsername: decoded.username
+            },
             {
               where: { id: req.body.activityID }
             }).then(function () {
