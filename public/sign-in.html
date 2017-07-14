@@ -58,11 +58,31 @@
         </div>
     </div>
 
+    <!-- Begin of Alerts -->
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+        id="alertModalRed">
+        <div class="modal-dialog modal-sm">
+            <div class="alert alert-danger" role="alert">
+                <strong>Hold Up!</strong>
+                <p id="alertModalMessageRed">Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+        id="alertModalGreen">
+        <div class="modal-dialog modal-sm">
+            <div class="alert alert-danger" role="alert">
+                <strong>Well Done!</strong>
+                <p id="alertModalMessageGreen">Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+    <!-- End of Alerts -->
+
     <script type="text/javascript">
         $(document).ready(function () {
 
-            console.log(window.localStorage);
-            
             // allows user to create post...grabs values from form
             $("#loginBtn").on("click", function (event) {
                 event.preventDefault();
@@ -74,14 +94,11 @@
                 // sends form values to db
                 $.post("/api/login", loginInputs)
                     .done(function (data) {
-                        console.log(data);
-
                         if (!data.token) {
-                            alert(data.message);
+                            $('#alertModalRed').modal('show');
+                            $("#alertModalMessageRed").text(data.message);
                         } else {
                             window.localStorage.setItem("token", data.token);
-                            console.log(window.localStorage);
-                            alert("Signing in...");
                             window.location.href = "/";
                         }
 
