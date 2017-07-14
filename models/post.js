@@ -29,6 +29,9 @@ module.exports = function (sequelize, DataTypes) {
     },
     partnerId: {
       type: DataTypes.INTEGER
+    },
+    partnerUsername: {
+      type: DataTypes.STRING
     }
   });
 
@@ -40,7 +43,6 @@ module.exports = function (sequelize, DataTypes) {
       }
     });
   }
-  
 
   return Post;
 };
