@@ -444,28 +444,59 @@
                     window.location.href = "/sign-in";
                     // if token exists, they are logged-in and assign form data to newPost 
                 } else {
-                    var newPost = {
-                        title: $("#title").val().trim(),
-                        category: $("#category").val().trim(),
-                        address: $("#address").val().trim(),
-                        time: $("#time").val().trim(),
-                        description: $("#description").val().trim(),
-                        authorization: window.localStorage.getItem("token")
-                    };
-                    
+
                     var date = new Date($("#time").val().trim());
                     var formatOptions = {
-                        day:    '2-digit',
-                        month:  '2-digit',
-                        year:   'numeric',
-                        hour:   '2-digit',
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
                         minute: '2-digit',
                         hour12: true
                     };
                     var dateString = date.toLocaleDateString('en-US', formatOptions);
                     dateString = dateString.replace(',', '')
+
+                    // var dateString = $("#time").val().trim();
+
+                    // var ISO_8601_re = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{3}))?(Z|[\+-]\d{2}(?::\d{2})?)$/,
+                    //     m = dateString.match(ISO_8601_re)2;
+
+                    // var year = +m[1],
+                    //     month = +m[2],
+                    //     dayOfMonth = +m[3],
+                    //     hour = +m[4],
+                    //     minute = +m[5],
+                    //     second = +m[6],
+                    //     ms = +m[7], // +'' === 0
+                    //     timezone = m[8];
+
+                    // if (timezone === 'Z') timezone = 0;
+                    // else timezone = timezone.split(':'), timezone = +(timezone[0][0] + '1') * (60 * (+timezone[0].slice(1)) + (+timezone[1] || 0));
+                    // // timezone is now minutes
+
+                    // your prefered way to construct
+                    // var myDate = new Date();
+                    // myDate.setUTCFullYear(year);
+                    // myDate.setUTCMonth(month - 1);
+                    // myDate.setUTCDate(dayOfMonth);
+                    // myDate.setUTCHours(hour);
+                    // myDate.setUTCMinutes(minute + timezone); // timezone offset set here, after hours
+                    // myDate.setUTCSeconds(second);
+                    // myDate.setUTCMilliseconds(ms);
+
+                    console.log(myDate); // Tue Jan 08 2013 17:16:36 GMT+0000 (GMT Standard Time)
+
+                    var newPost = {
+                        title: $("#title").val().trim(),
+                        category: $("#category").val().trim(),
+                        address: $("#address").val().trim(),
+                        time: myDate,
+                        description: $("#description").val().trim(),
+                        authorization: window.localStorage.getItem("token")
+                    };
+
                     console.log(dateString);
-                    //console.log(newPost.time + " is the time.");
 
                     // query DB to add data from newPort object
                     $.post("/api/post", newPost)

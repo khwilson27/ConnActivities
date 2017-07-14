@@ -22,8 +22,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       len: [1]
     },
-    act_time: {
-      type: DataTypes.STRING,
+    time: {
+      type: DataTypes.DATE,
       allowNull: false,
       len: [1]
     },

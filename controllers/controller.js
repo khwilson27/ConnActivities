@@ -218,8 +218,7 @@ module.exports = function (app) {
         console.error(err);
       } else {
         console.log(decoded);
-        console.log(req.body.time + " time");
-        var userId = decoded.id
+        var userId = decoded.id;
 
         db.Post.create({
           UserId: decoded.id,
@@ -227,7 +226,7 @@ module.exports = function (app) {
           description: req.body.description,
           address: req.body.address,
           category: req.body.category,
-          act_time: req.body.act_time
+          time: req.body.time
         }).then(function () {
           res.end("Added new post!");
         });
