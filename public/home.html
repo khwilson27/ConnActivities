@@ -115,7 +115,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn">Accept</button>
+                    <button type="button" class="btn btn-success" id="acceptBtn">Accept</button>
                 </div>
             </div>
         </div>
@@ -142,7 +142,31 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Accept</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                    <p class="debug-url"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-success btn-ok" id="confirmBtn">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End of Alerts -->
+
+
 
 
     <script type="text/javascript">
@@ -205,7 +229,7 @@
                         newDiv6Nested.attr("data-address", data.posts[i].address);
                         newDiv6Nested.attr("data-category", data.posts[i].category);
                         newDiv6Nested.attr("data-time", data.posts[i].time);
-                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                        newDiv6Nested.attr("data-userid", data.posts[i].UserId);
 
                         newDiv.append(newDiv2Nested);
                         newDiv2Nested.append(newDiv3Nested);
@@ -239,34 +263,33 @@
                 }
             });
 
+
             // accept button on-click (each card will have unique data attr id)
             // sequelize put function (using data attr id)
             $("#acceptBtn").on("click", function (event) {
                 event.preventDefault();
 
                 if (localStorage.getItem('token')) {
-                    if (confirm("Are you sure you want to accept this activity?")) {
-                        var acceptData = {
-                            authorization: window.localStorage.getItem("token"),
-                            activityID: $(this).attr("data-id"),
-                            UserId: $(this).attr("data-userid")
-                        }
-                        $.ajax({
-                            url: "/api/post/accept",
-                            type: 'PUT',
-                            data: acceptData,
-                            success: function (data) {
-                                if (data.error) {
-                                    $('#alertModalRed').modal('show');
-                                    $("#alertModalMessageRed").text(data.error);
-                                } else {
-                                    $('#alertModalGreen').modal('show');
-                                    $("#alertModalMessageGreen").text("Accepting post!");
-                                    window.location.href = "/";
-                                }
-                            }
-                        });
+                    var acceptData = {
+                        authorization: window.localStorage.getItem("token"),
+                        activityID: $(this).attr("data-id"),
+                        UserId: $(this).attr("data-userid")
                     }
+                    $.ajax({
+                        url: "/api/post/accept",
+                        type: 'PUT',
+                        data: acceptData,
+                        success: function (data) {
+                            if (data.error) {
+                                $('#alertModalRed').modal('show');
+                                $("#alertModalMessageRed").text(data.error);
+                            } else {
+                                $('#alertModalGreen').modal('show');
+                                $("#alertModalMessageGreen").text("Accepting post!");
+                                window.location.href = "/";
+                            }
+                        }
+                    });
                 } else {
                     $('#alertModalRed').modal('show');
                     $("#alertModalMessageRed").text("You must be logged in!");
