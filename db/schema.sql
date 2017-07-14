@@ -16,7 +16,7 @@ create table if not exists Posts (
     user_id int not null,
     description text,
     address text,
-    time date, -- activity date chosen by user
+    act_time varchar(100), -- activity date chosen by user
     date TIMESTAMP, -- when activity was created
     partner_id int,
     primary key (post_id),
