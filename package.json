@@ -4,7 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "mocha test",
+=======
+    "test": "karma start",
+>>>>>>> 5dffe6a32280c32bfa69aeb6415601efeaf00650
     "start": "node server.js"
   },
   "repository": {
