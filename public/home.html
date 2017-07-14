@@ -109,9 +109,9 @@
                     <p><strong>Time:</strong>
                         <div id="detail-time">timeHere</div>
                     </p>
-                    <!-- <p><strong>Posted by:</strong>
+                     <p><strong>Posted by:</strong>
                         <div id="detail-posted-by"></div>
-                    </p> -->
+                    </p> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -181,6 +181,7 @@
                 },
                 success: function (data) {
                     // console.log("success!");
+                    // console.log(data);
 
                     // add username to navbar if logged in, and 'sign-in' if not
 
@@ -230,6 +231,7 @@
                         newDiv6Nested.attr("data-category", data.posts[i].category);
                         newDiv6Nested.attr("data-time", data.posts[i].time);
                         newDiv6Nested.attr("data-userid", data.posts[i].UserId);
+                        newDiv6Nested.attr("data-username", data.posts[i].User.username);
 
                         newDiv.append(newDiv2Nested);
                         newDiv2Nested.append(newDiv3Nested);
@@ -307,6 +309,8 @@
                 $("#detail-address").text($(this).data("address"));
                 $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
                 $("#detail-time").text($(this).data("time"));
+                $("#detail-posted-by").text($(this).data("username"));
+
 
                 $("#acceptBtn").attr("data-id", $(this).data("id"));
                 $("#acceptBtn").attr("data-userid", $(this).data("userid"));

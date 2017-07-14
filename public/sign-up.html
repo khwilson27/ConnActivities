@@ -126,7 +126,7 @@
                         .done(function (data) {
                             if (data.error) {
                                 $('#alertModalRed').modal('show');
-                                $("#alertModalMessageRed").text("That EMAIL is already in use!");
+                                $("#alertModalMessageRed").text("That EMAIL or USERNAME is already in use!");
                             } else {
                                 window.location.href = "/sign-in";
                                 $('#alertModalGreen').modal('show');

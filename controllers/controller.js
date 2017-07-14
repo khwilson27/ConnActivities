@@ -121,7 +121,11 @@ module.exports = function (app) {
     db.Post.findAll({
       where: {
         partnerId: null
-      }
+      },
+      include: [{
+        model: db.User,
+        attributes: ["username", "id"]
+      }]
     }).then(function (dbPost) {
       var data = {
         posts: dbPost
@@ -157,7 +161,8 @@ module.exports = function (app) {
 
         // find all of the posts to this user
         db.Post.findAll({
-          where: { UserId: decoded.id },
+          where:
+          { UserId: decoded.id }
         }).then(function (dbPost) {
           var data = {
             username: decoded.username,
@@ -190,6 +195,10 @@ module.exports = function (app) {
         // find all of the posts to this user
         db.Post.findAll({
           where: { partnerId: decoded.id },
+          include: [{
+            model: db.User,
+            attributes: ["username", "id"]
+          }]
         }).then(function (dbPost) {
           var data = {
             posts: dbPost
