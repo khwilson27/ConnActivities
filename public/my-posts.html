@@ -3,18 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ConnActivities | My Posts</title>
+    <title>My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <style>
-        .thumbnail {
-            padding: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/img/favicon/favicon.ico" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
 <body>
@@ -91,7 +87,6 @@
                     </div>
                     <div class="row">
                         <div class="panel-body">
-
                             <div id="attending">
                                 <!-- <div class="col-md-3">
                                     <div class="thumbnail">
@@ -145,11 +140,9 @@
                     <p><strong>Category:</strong>
                         <div id="detail-category">categoryHere</div>
                     </p>
-
                     <p><strong>Description:</strong>
                         <div id="detail-description">descriptionHere</div>
                     </p>
-
                     <hr>
                     <p><strong>Address:</strong>
                         <div id="detail-address">addressHere</div>
@@ -226,7 +219,7 @@
     </div>
     <!-- END CREATE POST MODAL -->
     <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function() {
 
             console.log(window.localStorage);
 
@@ -242,7 +235,7 @@
                     headers: {
                         "Authorization": localStorage.getItem('token')
                     },
-                    success: function (data) {
+                    success: function(data) {
                         console.log("success! Created posts");
                         console.log(data);
                         $("#username").text(data.username);
@@ -343,7 +336,7 @@
                     headers: {
                         "Authorization": localStorage.getItem('token')
                     },
-                    success: function (data) {
+                    success: function(data) {
                         console.log("success! Accepted posts");
                         console.log(data);
 
@@ -434,7 +427,7 @@
 
 
             // allows user to create post...grabs values from form
-            $("#createPost").on("click", function (event) {
+            $("#createPost").on("click", function(event) {
                 event.preventDefault();
 
 
@@ -457,7 +450,7 @@
 
                     // query DB to add data from newPort object
                     $.post("/api/post", newPost)
-                        .done(function (data) {
+                        .done(function(data) {
                             console.log(data);
                             alert("Adding post...");
                             window.location.href = "/my-posts";
@@ -468,7 +461,7 @@
 
             // delete button on-click (each card will have unique data attr id)
             // sequelize delete function (using data attr id)
-            $(document).on("click", ".delete", function (event) {
+            $(document).on("click", ".delete", function(event) {
                 event.preventDefault();
 
                 if (confirm("Are you sure you want to delete?")) {
@@ -481,7 +474,7 @@
                         url: "/api/my-activities/",
                         type: 'DELETE',
                         data: deleteData,
-                        success: function () {
+                        success: function() {
                             alert("Deleting post...");
                             window.location.href = "/my-posts";
                         }
@@ -491,7 +484,7 @@
             })
 
             // populate modal with info upon detail button click
-            $(document).on("click", ".detailsModalBtn", function () {
+            $(document).on("click", ".detailsModalBtn", function() {
 
                 console.log("clicked modal");
 
@@ -506,7 +499,7 @@
             })
 
             // if cancel button clicked, then update post partnerID = null
-            $(document).on("click", ".cancelBtn", function (event) {
+            $(document).on("click", ".cancelBtn", function(event) {
                 event.preventDefault();
                 if (confirm("Are you sure you want to cancel?")) {
                     var cancelUser = {
@@ -517,7 +510,7 @@
                         url: "/api/post",
                         type: "PUT",
                         data: cancelUser,
-                        success: function () {
+                        success: function() {
                             alert("Cancelling attendance...");
                             window.location.href = "/my-posts";
                         }
@@ -526,7 +519,7 @@
             });
 
             // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function () {
+            $("#signOut").on("click", function() {
                 window.localStorage.removeItem("token");
                 window.location.href = "/sign-in";
             });
