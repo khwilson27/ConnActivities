@@ -275,8 +275,8 @@
                         "Authorization": localStorage.getItem('token')
                     },
                     success: function (data) {
-                        console.log("success! Created posts");
-                        console.log(data);
+                        // console.log("success! Created posts");
+                        // console.log(data);
                         $("#username").text(data.username);
 
                         // Build activity cards that user has created here
@@ -376,8 +376,8 @@
                         "Authorization": localStorage.getItem('token')
                     },
                     success: function (data) {
-                        console.log("success! Accepted posts");
-                        console.log(data);
+                        // console.log("success! Accepted posts");
+                        // console.log(data);
 
                         // Build activity cards that user has joined here
                         for (var i = 0; i < data.posts.length; i++) {
@@ -495,6 +495,8 @@
                         authorization: window.localStorage.getItem("token")
                     };
 
+                    console.log(newPost.time);
+
                     // query DB to add data from newPort object
                     $.post("/api/post", newPost)
                         .done(function (data) {
@@ -546,10 +548,39 @@
                 $("#detail-time").text($(this).data("time"));
                 $("#detail-address").text($(this).data("address"));
                 $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
-                $("#detail-time").text($(this).data("time"));
                 $("#detail-partner").text($(this).data("partner"));
 
-                // $("#acceptBtn").attr("data-id", $(this).data("id"));
+                // time conversion to make it presentable
+                var uglyTime = $(this).data("time");
+
+                var year = uglyTime.substring(0, 4);
+                var month = uglyTime.substring(5, 7);
+                var day = uglyTime.substring(8, 10);
+                var time = uglyTime.substring(11, 16);
+                var timezone = uglyTime.substring(21, 24);
+
+                time = time.split(':'); // convert to array
+
+                // fetch
+                var hours = Number(time[0]);
+                var minutes = Number(time[1]);
+
+                // calculate
+                var timeValue;
+
+                if (hours > 0 && hours <= 12) {
+                    timeValue = "" + hours;
+                } else if (hours > 12) {
+                    timeValue = "" + (hours - 12);
+                } else if (hours == 0) {
+                    timeValue = "12";
+                }
+
+                timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+                timeValue += (hours >= 12) ? " PM" : " AM";  // get AM/PM
+
+                var prettyTime = month + "/" + day + "/" + year + " @ " + timeValue + " PST";
+                $("#detail-time").text(prettyTime);
             })
 
             // if cancel button clicked, then update post partnerID = null
