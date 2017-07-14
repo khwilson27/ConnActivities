@@ -121,9 +121,9 @@
                     <p><strong>Time:</strong>
                         <div id="detail-time">timeHere</div>
                     </p>
-                    <!--<p><strong>Posted by:</strong>
-                        <div id="detail-posted-by"></div>
-                    </p>-->
+                    <p><strong>Partner:</strong>
+                        <div id="detail-partner"></div>
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -275,8 +275,8 @@
                         "Authorization": localStorage.getItem('token')
                     },
                     success: function (data) {
-                        // console.log("success! Created posts");
-                        // console.log(data);
+                        console.log("success! Created posts");
+                        console.log(data);
                         $("#username").text(data.username);
 
                         // Build activity cards that user has created here
@@ -321,6 +321,7 @@
                             newDiv6Nested.attr("data-category", data.posts[i].category);
                             newDiv6Nested.attr("data-time", data.posts[i].time);
                             newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                            // newDiv6Nested.attr("data-partner", data.posts[i].User.username);
 
                             newDiv7Nested = $("<a>");
                             newDiv7Nested.attr("href", "#");
@@ -375,8 +376,8 @@
                         "Authorization": localStorage.getItem('token')
                     },
                     success: function (data) {
-                        // console.log("success! Accepted posts");
-                        // console.log(data);
+                        console.log("success! Accepted posts");
+                        console.log(data);
 
                         // Build activity cards that user has joined here
                         for (var i = 0; i < data.posts.length; i++) {
@@ -426,6 +427,7 @@
                             newDiv6Nested.attr("data-category", data.posts[i].category);
                             newDiv6Nested.attr("data-time", data.posts[i].time);
                             newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                            newDiv6Nested.attr("data-partner", data.posts[i].User.username);
 
                             newDiv.append(newDiv2Nested);
                             newDiv2Nested.append(newDiv3Nested);
@@ -547,6 +549,7 @@
                 $("#detail-address").text($(this).data("address"));
                 $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
                 $("#detail-time").text($(this).data("time"));
+                $("#detail-partner").text($(this).data("partner"));
 
                 // $("#acceptBtn").attr("data-id", $(this).data("id"));
             })
