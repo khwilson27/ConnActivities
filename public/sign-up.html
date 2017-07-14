@@ -6,62 +6,55 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <style>
-        .panel-default {
-            margin-top: 4em;
-        }
-
-        #logo {
-            font-size: 4em;
-        }
-
-        label {
-            text-align: right;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/img/favicon/favicon.ico" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
-<body>
-
+<body id="background">
     <div class="container">
         <div class="row">
 
             <div class="col-md-4 col-md-offset-4">
-                <h1 class="text-center" id="logo">ConnActivities</h1>
+                <img src="assets/img/logo/ca-logo-wht.png" alt="ConnActivities logo" id="ca-logo" height="120" width="120">
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="text-center" id="logo">ConnActivities<sup>&reg;</sup></h1>
+        </div>
+        <div class="row">
+            <h2 class="text-center" id="tag-line">One Friend. One Adventure.</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center"> <strong>Sign Up</strong>
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal">
                             <div class="form-group">
-                                <label for="inputEmail" class="col-sm-3 control-label">Username</label>
+                                <label for="inputEmail" class="col-sm-3 control-label label-sign-up">Username</label>
                                 <div class="col-sm-9">
                                     <input type="email" class="form-control" id="inputUsername" required="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail" class="col-sm-3 control-label">Email</label>
+                                <label for="inputEmail" class="col-sm-3 control-label label-sign-up">Email</label>
                                 <div class="col-sm-9">
                                     <input type="email" class="form-control" id="inputEmail" required="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputPassword" class="col-sm-3 control-label">Password</label>
+                                <label for="inputPassword" class="col-sm-3 control-label label-sign-up">Password</label>
                                 <div class="col-sm-9">
                                     <input type="password" class="form-control" id="inputPassword" required="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputPassword" class="col-sm-3 control-label">Re-Enter Password</label>
+                                <label for="inputPassword" class="col-sm-3 control-label label-sign-up">Re-Enter Password</label>
                                 <div class="col-sm-9">
                                     <input type="password" class="form-control" id="inputPasswordVerify" required="">
                                 </div>
@@ -72,11 +65,16 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="panel-footer text-center">Already have an account? <a href="/sign-in" class="">Sign-In Here</a>
+                        <div class="panel-footer text-center">Already have an account? <a href="/sign-in" class="">Sign In here</a>
                         </div>
                     </div>
                 </div>
             </div>
+            <footer class="footer navbar-fixed-bottom">
+                <div class="container">
+                    <p class="text-center">&copy; 2017 ConnActivities Co. All Rights Reserved.</p>
+                </div>
+            </footer>
         </div>
 
         <!-- Begin of Alerts -->
