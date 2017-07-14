@@ -17,6 +17,7 @@
 <body id="background">
     <div class="container">
         <div class="row">
+
             <div class="col-md-4 col-md-offset-4">
                 <img src="assets/img/logo/ca-logo-wht.png" alt="ConnActivities logo" id="ca-logo" height="120" width="120">
             </div>
@@ -75,29 +76,67 @@
                 </div>
             </footer>
         </div>
-        <script type="text/javascript">
-        // allows user to register...grabs values from form
-        $("#registerBtn").on("click", function(event) {
-            event.preventDefault();
-            if ($("#inputPassword").val().trim() != $("#inputPasswordVerify").val().trim()) {
-                alert("Passwords do NOT match!");
-            } else {
-                var newUser = {
-                    username: $("#inputUsername").val().trim(),
-                    email: $("#inputEmail").val().trim(),
-                    password: $("#inputPassword").val().trim()
-                };
 
-                // sends form values to db
-                $.post("/api/register", newUser)
-                    .done(function(data) {
-                        console.log(data);
-                        alert("Registering new user...");
-                        window.location.href = "/sign-in";
-                    });
-            }
-        });
+        <!-- Begin of Alerts -->
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+            id="alertModalRed">
+            <div class="modal-dialog modal-sm">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Hold Up!</strong>
+                    <p id="alertModalMessageRed">Modal body text goes here.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+            id="alertModalGreen">
+            <div class="modal-dialog modal-sm">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Well Done!</strong>
+                    <p id="alertModalMessageGreen">Modal body text goes here.</p>
+                </div>
+            </div>
+        </div>
+        <!-- End of Alerts -->
+
+        <script type="text/javascript">
+            // allows user to register...grabs values from form
+            $("#registerBtn").on("click", function (event) {
+
+                event.preventDefault();
+
+                if (!$("#inputUsername").val().trim() || !$("#inputEmail").val().trim()) {
+                    $('#alertModalRed').modal('show');
+                    $("#alertModalMessageRed").text("Please enter a USERNAME and EMAIL!");
+                } else if (!$("#inputPassword").val().trim()) {
+                    $('#alertModalRed').modal('show');
+                    $("#alertModalMessageRed").text("Please enter a PASSWORD!");
+                } else if ($("#inputPassword").val().trim() != $("#inputPasswordVerify").val().trim()) {
+                    $('#alertModalRed').modal('show');
+                    $("#alertModalMessageRed").text("Passwords DO NOT match!");
+                } else {
+                    var newUser = {
+                        username: $("#inputUsername").val().trim(),
+                        email: $("#inputEmail").val().trim(),
+                        password: $("#inputPassword").val().trim()
+                    };
+
+                    // sends form values to db
+                    $.post("/api/register", newUser)
+                        .done(function (data) {
+                            if (data.error) {
+                                $('#alertModalRed').modal('show');
+                                $("#alertModalMessageRed").text("That EMAIL is already in use!");
+                            } else {
+                                window.location.href = "/sign-in";
+                                $('#alertModalGreen').modal('show');
+                                $("#alertModalMessageGreen").text("Registered new account!");
+                            }
+                        });
+                }
+            });
         </script>
+
 </body>
 
 </html>

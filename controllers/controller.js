@@ -54,7 +54,7 @@ module.exports = function (app) {
     }).then(function () {
       res.end("Registration complete!");
     }).catch(function (err) {
-      res.send(err);
+      res.json({ error: err.message });
     });
   });
 
@@ -262,11 +262,6 @@ module.exports = function (app) {
       };
     });
 
-    // db.User.destroy({
-    //   where: { id: req.params.id }
-    // }).then(function () {
-    //   res.redirect('/my-activities');
-    // });
   });
 
   // removes User from activity
@@ -298,17 +293,26 @@ module.exports = function (app) {
           }
         */
         console.error(err);
-        res.error(err);
+        res.json({ error: err });
       } else {
 
-        // update post partnerId to user
-        db.Post.update(
-          { partnerId: decoded.id },
-          {
-            where: { id: req.body.activityID }
-          }).then(function () {
-            res.end("Activity joined!");
-          });
+        // check if the user is trying to accept their own post
+        console.log(req.body);
+        console.log(decoded.id, req.body.UserId);
+
+        if (decoded.id == req.body.UserId) {
+          res.json({ error: "You can't accept your own post!" });
+        } else {
+          // update post partnerId to user
+          db.Post.update(
+            { partnerId: decoded.id },
+            {
+              where: { id: req.body.activityID }
+            }).then(function () {
+              res.end("Activity joined!");
+            });
+        }
+
 
       }; // closes else
     }) //closes jwt.verify
