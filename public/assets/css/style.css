@@ -2,13 +2,13 @@
     text-align: right;
 }
 
-.panel-start {
+.panel-default {
     margin-top: 2em;
 }
 
 #logo {
     font-family: Montserrat;
-    font-size: 4.5em;
+    font-size: 4em;
     color: #fff;
     text-align: center;
 }
@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-footer {
+#footer-copy {
     font-family: Montserrat;
     font-size: 1em;
     color: #fff;
@@ -45,14 +45,43 @@ footer {
     margin-top: 4em;
 }
 
-#background {
+.background-image-gliding {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
     background-image: url("../img/background/gliding.jpg");
-    background-size: cover;
-    background-color: #efefef;
+    background-size: 100vw 100vh;;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.background-image-camping {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/background/camping.jpg");
+    background-size: 100vw 100vh;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.panel-sign-in {
+    opacity: 0.9;
 }
 
 .navbar {
     border-radius: 0;
+    background-color: #2aa4bf;
 }
 
 sup {
@@ -61,6 +90,96 @@ sup {
 }
 
 .form-horizontal .control-label {
-    text-align: left;
+    text-align: right;
     border-radius: 50px;
+}
+
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+}
+
+.panel-heading-name {
+    font-family: Montserrat;
+    font-size: 1em;
+    color: #fff;
+
+    background-color: #fff;
+}
+
+.panel-footer {
+    background-color: #fff;
+}
+
+.panel-name {
+    font-family: Montserrat;
+    text-align: center;
+}
+
+.navbar-brand,
+.modal-title,
+.btn,
+.control-label,
+.panel-footer,
+li a {
+    font-family: Montserrat;
+}
+
+#logo-span {
+    display: inline;
+}
+
+#navbar-logo {
+    margin-right: 10px;
+}
+
+.nav.navbar-nav.navbar-right li a,
+#brand-name {
+    color: #fff;
+}
+
+#delete {
+    background-color: #FB4D3D;
+    border-color: #FB4D3D;
+}
+
+.btn-info {
+    background-color: #15E6CD;
+    border-color: #15E6CD;
+}
+
+#acceptBtn {
+    background-color: #7FB800;
+    border-color: #7FB800;
+}
+
+.panel>.panel-heading {
+    background-color: #2aa4bf;
+    color: #fff;
+}
+
+#create-post,
+#registerBtn,
+#loginBtn {
+    background-color: #2aa4bf;
+    border-color: #2aa4bf;
+    color: #fff;
+}
+
+#detail-category,
+#detail-description,
+#detail-address,
+#detail-time,
+#detail-partner {
+    font-family: Montserrat;
+}
+
+p strong {
+    font-family: Montserrat;
 }
