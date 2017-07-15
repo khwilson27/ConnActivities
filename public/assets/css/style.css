@@ -45,12 +45,12 @@
     margin-top: 4em;
 }
 
-#background {
+/*#background {
     background-image: url("../img/background/gliding.jpg");
     background-size: cover;
     background-color: #efefef;
 }
-
+*/
 .navbar {
     border-radius: 0;
     background-color: #2aa4bf;
@@ -135,4 +135,8 @@ li a {
 	background-color: #2aa4bf;
 	border-color: #2aa4bf;
 	color: #fff;
+}
+
+#background {
+	background-color: #e4e4e4;
 }

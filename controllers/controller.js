@@ -54,7 +54,7 @@ module.exports = function (app) {
     }).then(function () {
       res.end("Registration complete!");
     }).catch(function (err) {
-      res.send(err);
+      res.json({ error: err.message });
     });
   });
 
@@ -81,7 +81,7 @@ module.exports = function (app) {
             "id": data.id,
             "username": data.username,
             "email": data.email
-          }, "secretWord", {
+          }, process.env.SECRET_WORD, {
               expiresIn: "24h" // expires in 24 hours
             });
 
@@ -112,7 +112,7 @@ module.exports = function (app) {
 
     if (token) {
       // Checks to see if it's expired
-      jwt.verify(token, 'secretWord', function (err, decoded) {
+      jwt.verify(token, process.env.SECRET_WORD, function (err, decoded) {
         decodedToken = decoded;
       });
     }
@@ -121,7 +121,11 @@ module.exports = function (app) {
     db.Post.findAll({
       where: {
         partnerId: null
-      }
+      },
+      include: [{
+        model: db.User,
+        attributes: ["username", "id"]
+      }]
     }).then(function (dbPost) {
       var data = {
         posts: dbPost
@@ -143,7 +147,7 @@ module.exports = function (app) {
     var token = req.headers.authorization;
 
     // Checks to see if it's expired
-    jwt.verify(token, 'secretWord', function (err, decoded) {
+    jwt.verify(token, process.env.SECRET_WORD, function (err, decoded) {
       if (err) {
         /*
           err = {
@@ -157,7 +161,13 @@ module.exports = function (app) {
 
         // find all of the posts to this user
         db.Post.findAll({
-          where: { UserId: decoded.id },
+          where:
+          { UserId: decoded.id },
+          include: [{
+            model: db.User,
+            where: {},
+            attributes: ["username", "id"]
+          }]
         }).then(function (dbPost) {
           var data = {
             username: decoded.username,
@@ -175,7 +185,7 @@ module.exports = function (app) {
     var token = req.headers.authorization;
 
     // Checks to see if it's expired
-    jwt.verify(token, 'secretWord', function (err, decoded) {
+    jwt.verify(token, process.env.SECRET_WORD, function (err, decoded) {
       if (err) {
         /*
           err = {
@@ -190,6 +200,10 @@ module.exports = function (app) {
         // find all of the posts to this user
         db.Post.findAll({
           where: { partnerId: decoded.id },
+          include: [{
+            model: db.User,
+            attributes: ["username", "id"]
+          }]
         }).then(function (dbPost) {
           var data = {
             posts: dbPost
@@ -206,7 +220,7 @@ module.exports = function (app) {
     var token = req.body.authorization;
 
     // Checks to see if it's expired
-    jwt.verify(token, 'secretWord', function (err, decoded) {
+    jwt.verify(token, process.env.SECRET_WORD, function (err, decoded) {
       if (err) {
         /*
           err = {
@@ -215,9 +229,9 @@ module.exports = function (app) {
             expiredAt: 1408621000
           }
         */
-        console.error(err);
+        res.json({ error: err.message });
       } else {
-        console.log(decoded);
+        // console.log(decoded);
         var userId = decoded.id
 
         db.Post.create({
@@ -241,7 +255,7 @@ module.exports = function (app) {
     var token = req.body.authorization;
 
     // Checks to see if it's expired
-    jwt.verify(token, 'secretWord', function (err, decoded) {
+    jwt.verify(token, process.env.SECRET_WORD, function (err, decoded) {
       if (err) {
         /*
           err = {
@@ -262,11 +276,6 @@ module.exports = function (app) {
       };
     });
 
-    // db.User.destroy({
-    //   where: { id: req.params.id }
-    // }).then(function () {
-    //   res.redirect('/my-activities');
-    // });
   });
 
   // removes User from activity
@@ -288,7 +297,7 @@ module.exports = function (app) {
     var token = req.body.authorization;
 
     // Checks to see if it's expired
-    jwt.verify(token, 'secretWord', function (err, decoded) {
+    jwt.verify(token, process.env.SECRET_WORD, function (err, decoded) {
       if (err) {
         /*
           err = {
@@ -298,17 +307,29 @@ module.exports = function (app) {
           }
         */
         console.error(err);
-        res.error(err);
+        res.json({ error: err });
       } else {
 
-        // update post partnerId to user
-        db.Post.update(
-          { partnerId: decoded.id },
-          {
-            where: { id: req.body.activityID }
-          }).then(function () {
-            res.end("Activity joined!");
-          });
+        // check if the user is trying to accept their own post
+        // console.log(req.body);
+        // console.log(decoded.id, req.body.UserId);
+
+        if (decoded.id == req.body.UserId) {
+          res.json({ error: "You can't accept your own post!" });
+        } else {
+          // update post partnerId to user
+          db.Post.update(
+            {
+              partnerId: decoded.id,
+              partnerUsername: decoded.username
+            },
+            {
+              where: { id: req.body.activityID }
+            }).then(function () {
+              res.end("Activity joined!");
+            });
+        }
+
 
       }; // closes else
     }) //closes jwt.verify
