@@ -8,32 +8,35 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/gsdk.css">
     <link rel="icon" href="assets/img/favicon/favicon.ico" type="image/png" />
     <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
-<body>
-    <nav class="navbar navbar-default">
+<body id="background">
+    <nav class="navbar navbar-inverse">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">ConnActivities</a>
+                <a class="navbar-brand" href="#">
+                    <span id="logo-span">
+                        <img src="assets/img/logo/ca-logo-wht.png" alt="ConnActivities logo" id="navbar-logo" height="25" width="25">
+                    </span><span id="brand-name">ConnActivities</span>
+                </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
+                <li><a id="username"></a></li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/my-posts">My Posts</a></li>
                 <li><a href="#" id="signOut">Sign Out</a></li>
-                <li>
-                    <a id="username"></a>
-                </li>
             </ul>
         </div>
     </nav>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="#" class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
+                <a href="#" class="btn btn-primary btn-md btn-round btn-fill" id="create-post" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
             </div>
         </div>
         <br>
@@ -45,13 +48,13 @@
                     </div>
                     <div class="row">
                         <div class="panel-body myPosts">
-                            <!--<div class="col-md-3">
+                            <div class="col-md-3">
                                 <div class="thumbnail">
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" data-id="1" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                        <a href="#" class="btn btn-info btn-xs  btn-round btn-fill" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-danger btn-xs btn-round btn-fill pull-right" id="delete" data-id="1" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -60,8 +63,8 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                        <a href="#" class="btn btn-info btn-xs btn-round btn-fill" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-danger btn-xs btn-round btn-fill pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -70,31 +73,31 @@
                                     <img src="http://placehold.it/500x250/EEE" alt="image">
                                     <div class="caption">
                                         <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                        <a href="#" class="btn btn-info btn-xs btn-round btn-fill" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                        <a href="#" class="btn btn-danger btn-xs btn-round btn-fill pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
                         </div>
                     </div>
                     <!-- closes row div -->
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">Attending</h3>
                     </div>
                     <div class="row">
                         <div class="panel-body">
                             <div id="attending">
-                                <!-- <div class="col-md-3">
+                                <div class="col-md-3">
                                     <div class="thumbnail">
                                         <img src="http://placehold.it/500x250/EEE" alt="image">
                                         <div class="caption">
                                             <h4>Activity</h4>
-                                            <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                            <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                            <a href="#" class="btn btn-info btn-xs btn-round btn-fill" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                            <a href="#" class="btn btn-default btn-xs btn-round btn-fill pull-right" id="cancel" role="button">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -103,8 +106,8 @@
                                         <img src="http://placehold.it/500x250/EEE" alt="image">
                                         <div class="caption">
                                             <h4>Activity</h4>
-                                            <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                            <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                            <a href="#" class="btn btn-info btn-xs btn-round btn-fill" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                            <a href="#" class="btn btn-default btn-xs btn-round btn-fill pull-right" id="cancel" role="button">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -113,11 +116,11 @@
                                         <img src="http://placehold.it/500x250/EEE" alt="image">
                                         <div class="caption">
                                             <h4>Activity</h4>
-                                            <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                            <a href="#" class="btn btn-default btn-xs pull-right" id="cancel" role="button">Cancel</a>
+                                            <a href="#" class="btn btn-info btn-xs btn-round btn-fill" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
+                                            <a href="#" class="btn btn-default btn-xs btn-round btn-fill pull-right" id="cancel" role="button">Cancel</a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,8 +158,8 @@
                     </p>-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="acceptBtn">Accept</button>
+                    <button type="button" class="btn btn-default btn-round btn-fill" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success btn-round btn-fill" data-dismiss="modal" id="acceptBtn">Accept</button>
                 </div>
             </div>
         </div>
@@ -211,8 +214,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="createPost" class="btn btn-primary" data-dismiss="modal">Create Post</button>
+                    <button type="button" class="btn btn-default btn-round btn-fill" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="createPost" class="btn btn-primary btn-round btn-fill" data-dismiss="modal">Create Post</button>
                 </div>
             </div>
         </div>
@@ -221,310 +224,310 @@
     <script type="text/javascript">
     $(document).ready(function() {
 
-            console.log(window.localStorage);
+        console.log(window.localStorage);
 
-            // check if token exists using .getItem method
-            // run GET ajax call if token exists
-            if (window.localStorage.getItem("token")) {
+        // check if token exists using .getItem method
+        // run GET ajax call if token exists
+        if (window.localStorage.getItem("token")) {
 
-                // API call to retrieve posts that user has created
-                $.ajax({
-                    url: "/api/my-post",
-                    type: 'GET',
-                    // Fetch the stored token from localStorage and set in the header
-                    headers: {
-                        "Authorization": localStorage.getItem('token')
-                    },
-                    success: function(data) {
-                        console.log("success! Created posts");
-                        console.log(data);
-                        $("#username").text(data.username);
+            // API call to retrieve posts that user has created
+            $.ajax({
+                url: "/api/my-post",
+                type: 'GET',
+                // Fetch the stored token from localStorage and set in the header
+                headers: {
+                    "Authorization": localStorage.getItem('token')
+                },
+                success: function(data) {
+                    console.log("success! Created posts");
+                    console.log(data);
+                    $("#username").text(data.username);
 
-                        // Build activity cards that user has created here
-                        for (var i = 0; i < data.posts.length; i++) {
-                            // console.log(data.posts[i].category);
-                            // var cat = data.posts[i].category;
-                            var newDiv;
-                            var newDiv2Nested;
-                            var newDiv3Nested;
-                            var newDiv4Nested;
-                            var newDiv5Nested;
-                            var newDiv6Nested;
-                            var newDiv7Nested;
-                            var newDiv8Nested;
+                    // Build activity cards that user has created here
+                    for (var i = 0; i < data.posts.length; i++) {
+                        // console.log(data.posts[i].category);
+                        // var cat = data.posts[i].category;
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
+                        var newDiv7Nested;
+                        var newDiv8Nested;
 
-                            newDiv = $("<div>");
-                            newDiv.addClass("col-md-3");
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-3");
 
-                            newDiv2Nested = $("<div>");
-                            newDiv2Nested.addClass("thumbnail");
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
 
-                            newDiv3Nested = $("<img>");
+                        newDiv3Nested = $("<img>");
 
-                            newDiv4Nested = $("<div>");
-                            newDiv4Nested.addClass("caption");
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
 
-                            newDiv5Nested = $("<h4>");
-                            newDiv5Nested.text(data.posts[i].title);
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
 
-                            newDiv6Nested = $("<a>");
-                            newDiv6Nested.attr("href", "#");
-                            newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
-                            newDiv6Nested.attr("role”, “button");
-                            newDiv6Nested.attr("data-toggle", "modal");
-                            newDiv6Nested.attr("data-target", "#modalDetails");
-                            newDiv6Nested.text("Details");
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs btn-round btn-fill detailsModalBtn");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
 
-                            // Add the activity details info to the detail button
-                            newDiv6Nested.attr("data-id", data.posts[i].id);
-                            newDiv6Nested.attr("data-title", data.posts[i].title);
-                            newDiv6Nested.attr("data-description", data.posts[i].description);
-                            newDiv6Nested.attr("data-address", data.posts[i].address);
-                            newDiv6Nested.attr("data-category", data.posts[i].category);
-                            newDiv6Nested.attr("data-time", data.posts[i].time);
-                            newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                        // Add the activity details info to the detail button
+                        newDiv6Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested.attr("data-title", data.posts[i].title);
+                        newDiv6Nested.attr("data-description", data.posts[i].description);
+                        newDiv6Nested.attr("data-address", data.posts[i].address);
+                        newDiv6Nested.attr("data-category", data.posts[i].category);
+                        newDiv6Nested.attr("data-time", data.posts[i].time);
+                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
 
-                            newDiv7Nested = $("<a>");
-                            newDiv7Nested.attr("href", "#");
-                            newDiv7Nested.addClass("btn btn-danger btn-xs pull-right delete");
-                            newDiv7Nested.attr("data-id", data.posts[i].id);
-                            newDiv7Nested.attr("data-id", );
-                            newDiv7Nested.attr("role", "button");
+                        newDiv7Nested = $("<a>");
+                        newDiv7Nested.attr("href", "#");
+                        newDiv7Nested.addClass("btn btn-danger btn-xs btn-round btn-fill pull-right delete");
+                        newDiv7Nested.attr("data-id", data.posts[i].id);
+                        newDiv7Nested.attr("data-id", );
+                        newDiv7Nested.attr("role", "button");
 
-                            newDiv8Nested = $("<i>");
-                            newDiv8Nested.addClass("fa fa-trash-o");
-                            newDiv8Nested.attr("aria-hidden", "true");
+                        newDiv8Nested = $("<i>");
+                        newDiv8Nested.addClass("fa fa-trash-o");
+                        newDiv8Nested.attr("aria-hidden", "true");
 
-                            newDiv.append(newDiv2Nested);
-                            newDiv2Nested.append(newDiv3Nested);
-                            newDiv2Nested.append(newDiv4Nested);
-                            newDiv4Nested.append(newDiv5Nested);
-                            newDiv4Nested.append(newDiv6Nested);
-                            newDiv4Nested.append(newDiv7Nested);
-                            newDiv7Nested.append(newDiv8Nested);
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+                        newDiv4Nested.append(newDiv7Nested);
+                        newDiv7Nested.append(newDiv8Nested);
 
-                            $(".myPosts").append(newDiv);
+                        $(".myPosts").append(newDiv);
 
-                            // add correct img link depending on category
-                            switch (data.posts[i].category) {
-                                case "sports":
-                                    newDiv3Nested.attr("src", "/assets/img/sports.jpg");
-                                    break;
+                        // add correct img link depending on category
+                        switch (data.posts[i].category) {
+                            case "sports":
+                                newDiv3Nested.attr("src", "/assets/img/sports.jpg");
+                                break;
 
-                                case "entertainment":
-                                    newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
-                                    break;
+                            case "entertainment":
+                                newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
+                                break;
 
-                                case "food":
-                                    newDiv3Nested.attr("src", "/assets/img/food.jpg");
-                                    break;
+                            case "food":
+                                newDiv3Nested.attr("src", "/assets/img/food.jpg");
+                                break;
 
-                                case "miscellaneous":
-                                    newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
-                                    break;
-                            }
+                            case "miscellaneous":
+                                newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
+                                break;
                         }
-
                     }
-                });
 
-                // API call to retrieve posts that user has accepted
-                $.ajax({
-                    url: "/api/my-post/accepted",
-                    type: 'GET',
-                    // Fetch the stored token from localStorage and set in the header
-                    headers: {
-                        "Authorization": localStorage.getItem('token')
-                    },
-                    success: function(data) {
-                        console.log("success! Accepted posts");
-                        console.log(data);
+                }
+            });
 
-                        // Build activity cards that user has joined here
-                        for (var i = 0; i < data.posts.length; i++) {
+            // API call to retrieve posts that user has accepted
+            $.ajax({
+                url: "/api/my-post/accepted",
+                type: 'GET',
+                // Fetch the stored token from localStorage and set in the header
+                headers: {
+                    "Authorization": localStorage.getItem('token')
+                },
+                success: function(data) {
+                    console.log("success! Accepted posts");
+                    console.log(data);
 
-                            var newDiv;
-                            var newDiv2Nested;
-                            var newDiv3Nested;
-                            var newDiv4Nested;
-                            var newDiv5Nested;
-                            var newDiv6Nested;
-                            var newDiv7Nested;
+                    // Build activity cards that user has joined here
+                    for (var i = 0; i < data.posts.length; i++) {
 
-                            newDiv = $("<div>");
-                            newDiv.addClass("col-md-3");
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
+                        var newDiv7Nested;
 
-                            newDiv2Nested = $("<div>");
-                            newDiv2Nested.addClass("thumbnail");
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-3");
 
-                            newDiv3Nested = $("<img>");
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
 
-                            newDiv4Nested = $("<div>");
-                            newDiv4Nested.addClass("caption");
+                        newDiv3Nested = $("<img>");
 
-                            newDiv5Nested = $("<h4>");
-                            newDiv5Nested.text(data.posts[i].title);
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
 
-                            newDiv6Nested = $("<a>");
-                            newDiv6Nested.attr("href", "#");
-                            newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
-                            newDiv6Nested.attr("role”, “button");
-                            newDiv6Nested.attr("data-toggle", "modal");
-                            newDiv6Nested.attr("data-target", "#modalDetails");
-                            newDiv6Nested.text("Details");
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
 
-                            newDiv7Nested = $("<a>");
-                            newDiv7Nested.attr("href", "#");
-                            newDiv7Nested.addClass("btn btn-danger btn-xs pull-right cancelBtn");
-                            newDiv7Nested.attr("role”, “button");
-                            newDiv7Nested.text("Cancel");
-                            newDiv7Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
 
-                            // Add the activity details info to the detail button
-                            newDiv6Nested.attr("data-id", data.posts[i].id);
-                            newDiv6Nested.attr("data-title", data.posts[i].title);
-                            newDiv6Nested.attr("data-description", data.posts[i].description);
-                            newDiv6Nested.attr("data-address", data.posts[i].address);
-                            newDiv6Nested.attr("data-category", data.posts[i].category);
-                            newDiv6Nested.attr("data-time", data.posts[i].time);
-                            newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                        newDiv7Nested = $("<a>");
+                        newDiv7Nested.attr("href", "#");
+                        newDiv7Nested.addClass("btn btn-danger btn-xs pull-right cancelBtn");
+                        newDiv7Nested.attr("role”, “button");
+                        newDiv7Nested.text("Cancel");
+                        newDiv7Nested.attr("data-id", data.posts[i].id);
 
-                            newDiv.append(newDiv2Nested);
-                            newDiv2Nested.append(newDiv3Nested);
-                            newDiv2Nested.append(newDiv4Nested);
-                            newDiv4Nested.append(newDiv5Nested);
-                            newDiv4Nested.append(newDiv6Nested);
-                            newDiv4Nested.append(newDiv7Nested);
+                        // Add the activity details info to the detail button
+                        newDiv6Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested.attr("data-title", data.posts[i].title);
+                        newDiv6Nested.attr("data-description", data.posts[i].description);
+                        newDiv6Nested.attr("data-address", data.posts[i].address);
+                        newDiv6Nested.attr("data-category", data.posts[i].category);
+                        newDiv6Nested.attr("data-time", data.posts[i].time);
+                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
 
-                            $("#attending").append(newDiv);
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+                        newDiv4Nested.append(newDiv7Nested);
 
-                            // add correct img link depending on category
-                            switch (data.posts[i].category) {
-                                case "sports":
-                                    newDiv3Nested.attr("src", "/assets/img/sports.jpg");
-                                    break;
+                        $("#attending").append(newDiv);
 
-                                case "entertainment":
-                                    newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
-                                    break;
+                        // add correct img link depending on category
+                        switch (data.posts[i].category) {
+                            case "sports":
+                                newDiv3Nested.attr("src", "/assets/img/sports.jpg");
+                                break;
 
-                                case "food":
-                                    newDiv3Nested.attr("src", "/assets/img/food.jpg");
-                                    break;
+                            case "entertainment":
+                                newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
+                                break;
 
-                                case "miscellaneous":
-                                    newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
-                                    break;
-                            }
+                            case "food":
+                                newDiv3Nested.attr("src", "/assets/img/food.jpg");
+                                break;
+
+                            case "miscellaneous":
+                                newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
+                                break;
                         }
+                    }
+                }
+            });
+        }
+        // else {
+        //     alert("Please log-in");
+        //     window.location.href = "/sign-in";
+        // }
+
+
+        // allows user to create post...grabs values from form
+        $("#createPost").on("click", function(event) {
+            event.preventDefault();
+
+
+            // if token does not exists, user not logged-in
+            if (!window.localStorage.getItem("token")) {
+                alert("You need to be signed in!");
+                window.location.href = "/sign-in";
+                // if token exists, they are logged-in and assign form data to newPost 
+            } else {
+                var newPost = {
+                    title: $("#title").val().trim(),
+                    category: $("#category").val().trim(),
+                    address: $("#address").val().trim(),
+                    time: $("#time").val().trim(),
+                    description: $("#description").val().trim(),
+                    authorization: window.localStorage.getItem("token")
+                };
+
+                console.log(newPost);
+
+                // query DB to add data from newPort object
+                $.post("/api/post", newPost)
+                    .done(function(data) {
+                        console.log(data);
+                        alert("Adding post...");
+                        window.location.href = "/my-posts";
+                    });
+            }
+
+        });
+
+        // delete button on-click (each card will have unique data attr id)
+        // sequelize delete function (using data attr id)
+        $(document).on("click", ".delete", function(event) {
+            event.preventDefault();
+
+            if (confirm("Are you sure you want to delete?")) {
+                // console.log("deleted");
+                var deleteData = {
+                    authorization: window.localStorage.getItem("token"),
+                    activityID: $(this).attr("data-id")
+                }
+                $.ajax({
+                    url: "/api/my-activities/",
+                    type: 'DELETE',
+                    data: deleteData,
+                    success: function() {
+                        alert("Deleting post...");
+                        window.location.href = "/my-posts";
                     }
                 });
             }
-            // else {
-            //     alert("Please log-in");
-            //     window.location.href = "/sign-in";
-            // }
 
+        })
 
-            // allows user to create post...grabs values from form
-            $("#createPost").on("click", function(event) {
-                event.preventDefault();
+        // populate modal with info upon detail button click
+        $(document).on("click", ".detailsModalBtn", function() {
 
+            console.log("clicked modal");
 
-                // if token does not exists, user not logged-in
-                if (!window.localStorage.getItem("token")) {
-                    alert("You need to be signed in!");
-                    window.location.href = "/sign-in";
-                    // if token exists, they are logged-in and assign form data to newPost 
-                } else {
-                    var newPost = {
-                        title: $("#title").val().trim(),
-                        category: $("#category").val().trim(),
-                        address: $("#address").val().trim(),
-                        time: $("#time").val().trim(),
-                        description: $("#description").val().trim(),
-                        authorization: window.localStorage.getItem("token")
-                    };
+            $("#detail-title").text($(this).data("title"));
+            $("#detail-description").text($(this).data("description"));
+            $("#detail-time").text($(this).data("time"));
+            $("#detail-address").text($(this).data("address"));
+            $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
+            $("#detail-time").text($(this).data("time"));
 
-                    console.log(newPost);
+            // $("#acceptBtn").attr("data-id", $(this).data("id"));
+        })
 
-                    // query DB to add data from newPort object
-                    $.post("/api/post", newPost)
-                        .done(function(data) {
-                            console.log(data);
-                            alert("Adding post...");
-                            window.location.href = "/my-posts";
-                        });
+        // if cancel button clicked, then update post partnerID = null
+        $(document).on("click", ".cancelBtn", function(event) {
+            event.preventDefault();
+            if (confirm("Are you sure you want to cancel?")) {
+                var cancelUser = {
+                    authorization: window.localStorage.getItem("token"),
+                    activityID: $(this).attr("data-id")
                 }
-
-            });
-
-            // delete button on-click (each card will have unique data attr id)
-            // sequelize delete function (using data attr id)
-            $(document).on("click", ".delete", function(event) {
-                event.preventDefault();
-
-                if (confirm("Are you sure you want to delete?")) {
-                    // console.log("deleted");
-                    var deleteData = {
-                        authorization: window.localStorage.getItem("token"),
-                        activityID: $(this).attr("data-id")
+                $.ajax({
+                    url: "/api/post",
+                    type: "PUT",
+                    data: cancelUser,
+                    success: function() {
+                        alert("Cancelling attendance...");
+                        window.location.href = "/my-posts";
                     }
-                    $.ajax({
-                        url: "/api/my-activities/",
-                        type: 'DELETE',
-                        data: deleteData,
-                        success: function() {
-                            alert("Deleting post...");
-                            window.location.href = "/my-posts";
-                        }
-                    });
-                }
+                });
+            }
+        });
 
-            })
+        // allows user to sign out...deletes token and redirects to login
+        $("#signOut").on("click", function() {
+            window.localStorage.removeItem("token");
+            window.location.href = "/sign-in";
+        });
 
-            // populate modal with info upon detail button click
-            $(document).on("click", ".detailsModalBtn", function() {
-
-                console.log("clicked modal");
-
-                $("#detail-title").text($(this).data("title"));
-                $("#detail-description").text($(this).data("description"));
-                $("#detail-time").text($(this).data("time"));
-                $("#detail-address").text($(this).data("address"));
-                $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
-                $("#detail-time").text($(this).data("time"));
-
-                // $("#acceptBtn").attr("data-id", $(this).data("id"));
-            })
-
-            // if cancel button clicked, then update post partnerID = null
-            $(document).on("click", ".cancelBtn", function(event) {
-                event.preventDefault();
-                if (confirm("Are you sure you want to cancel?")) {
-                    var cancelUser = {
-                        authorization: window.localStorage.getItem("token"),
-                        activityID: $(this).attr("data-id")
-                    }
-                    $.ajax({
-                        url: "/api/post",
-                        type: "PUT",
-                        data: cancelUser,
-                        success: function() {
-                            alert("Cancelling attendance...");
-                            window.location.href = "/my-posts";
-                        }
-                    });
-                }
-            });
-
-            // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function() {
-                window.localStorage.removeItem("token");
-                window.location.href = "/sign-in";
-            });
-
-        }) // closes document.ready fn
+    }) // closes document.ready fn
     </script>
 </body>
 
