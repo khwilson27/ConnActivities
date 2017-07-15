@@ -6,85 +6,58 @@
     <title>My Posts</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/gsdk.css">
     <link rel="icon" href="assets/img/favicon/favicon.ico" type="image/png" />
     <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
-<body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
+<body id="background">
+    <div class="background-image"></div>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">ConnActivities</a>
+                <a class="navbar-brand" href="#">
+                    <span id="logo-span">
+                        <img src="assets/img/logo/ca-logo-wht.png" alt="ConnActivities logo" id="navbar-logo" height="25" width="25">
+                    </span><span id="brand-name">ConnActivities</span>
+                </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
+                <li><a id="username"></a></li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/my-posts">My Posts</a></li>
                 <li><a href="#" id="signOut">Sign Out</a></li>
-                <li>
-                    <a id="username"></a>
-                </li>
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="#" class="btn btn-primary btn-md" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
+                <a href="#" class="btn btn-primary btn-md btn-round btn-fill" id="create-post" role="button" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-default panel-heading-name">
                     <div class="panel-heading">
-                        <h3 class="panel-title">My Posts</h3>
+                        <h3 class="panel-title panel-name">My Posts</h3>
                     </div>
                     <div class="row">
                         <div class="panel-body myPosts">
-                            <!--<div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE" alt="image">
-                                    <div class="caption">
-                                        <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" data-id="1" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE" alt="image">
-                                    <div class="caption">
-                                        <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE" alt="image">
-                                    <div class="caption">
-                                        <h4>Activity</h4>
-                                        <a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#modalDetails">Details</a>
-                                        <a href="#" class="btn btn-danger btn-xs pull-right" id="delete" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </div>-->
                         </div>
                     </div>
                     <!-- closes row div -->
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-default panel-heading-name">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Attending</h3>
+                        <h3 class="panel-title panel-name">Attending</h3>
                     </div>
                     <div class="row">
                         <div class="panel-body">
@@ -126,7 +99,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default btn-round btn-fill" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -180,17 +153,15 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="createPost" class="btn btn-primary">Create Post</button>
+                    <button type="button" class="btn btn-default btn-round btn-fill" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="createPost" class="btn btn-primary btn-round btn-fill">Create Post</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- END CREATE POST MODAL -->
-
     <!-- Begin of Alerts -->
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-        id="alertModalRed">
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="alertModalRed">
         <div class="modal-dialog modal-sm">
             <div class="alert alert-danger" role="alert">
                 <strong>Hold Up!</strong>
@@ -198,9 +169,7 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-        id="alertModalGreen">
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="alertModalGreen">
         <div class="modal-dialog modal-sm">
             <div class="alert alert-danger" role="alert">
                 <strong>Well Done!</strong>
@@ -208,22 +177,17 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="confirmModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-        id="confirmModal">
+    <div class="modal fade" id="confirmModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="confirmModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
                 </div>
-
                 <div class="modal-body">
                     <p>Are you sure?</p>
                     <p class="debug-url"></p>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-success btn-ok" id="confirmDelBtn">Confirm</a>
@@ -231,22 +195,17 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="confirmModalCancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-        id="confirmModal">
+    <div class="modal fade" id="confirmModalCancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="confirmModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Confirm Cancel</h4>
                 </div>
-
                 <div class="modal-body">
                     <p>Are you sure?</p>
                     <p class="debug-url"></p>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-success btn-ok" id="confirmCancelBtn">Confirm</a>
@@ -255,359 +214,295 @@
         </div>
     </div>
     <!-- End of Alerts -->
-
     <!-- BEGIN SCRIPT -->
     <script type="text/javascript">
-        $(document).ready(function () {
-
-            console.log(window.localStorage);
-
-            // check if token exists using .getItem method
-            // run GET ajax call if token exists
-            if (window.localStorage.getItem("token")) {
-
-                // API call to retrieve posts that user has created
-                $.ajax({
-                    url: "/api/my-post",
-                    type: 'GET',
-                    // Fetch the stored token from localStorage and set in the header
-                    headers: {
-                        "Authorization": localStorage.getItem('token')
-                    },
-                    success: function (data) {
-                        // console.log("success! Created posts");
-                        // console.log(data);
-                        $("#username").text(data.username);
-
-                        // Build activity cards that user has created here
-                        for (var i = 0; i < data.posts.length; i++) {
-
-                            var newDiv;
-                            var newDiv2Nested;
-                            var newDiv3Nested;
-                            var newDiv4Nested;
-                            var newDiv5Nested;
-                            var newDiv6Nested;
-                            var newDiv7Nested;
-                            var newDiv8Nested;
-
-                            newDiv = $("<div>");
-                            newDiv.addClass("col-md-3");
-
-                            newDiv2Nested = $("<div>");
-                            newDiv2Nested.addClass("thumbnail");
-
-                            newDiv3Nested = $("<img>");
-
-                            newDiv4Nested = $("<div>");
-                            newDiv4Nested.addClass("caption");
-
-                            newDiv5Nested = $("<h4>");
-                            newDiv5Nested.text(data.posts[i].title);
-
-                            newDiv6Nested = $("<a>");
-                            newDiv6Nested.attr("href", "#");
-                            newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
-                            newDiv6Nested.attr("role”, “button");
-                            newDiv6Nested.attr("data-toggle", "modal");
-                            newDiv6Nested.attr("data-target", "#modalDetails");
-                            newDiv6Nested.text("Details");
-
-                            // Add the activity details info to the detail button
-                            newDiv6Nested.attr("data-id", data.posts[i].id);
-                            newDiv6Nested.attr("data-title", data.posts[i].title);
-                            newDiv6Nested.attr("data-description", data.posts[i].description);
-                            newDiv6Nested.attr("data-address", data.posts[i].address);
-                            newDiv6Nested.attr("data-category", data.posts[i].category);
-                            newDiv6Nested.attr("data-time", data.posts[i].time);
-                            newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
-                            newDiv6Nested.attr("data-partner", data.posts[i].partnerUsername);
-
-                            newDiv7Nested = $("<a>");
-                            newDiv7Nested.attr("href", "#");
-                            newDiv7Nested.addClass("btn btn-danger btn-xs pull-right delete");
-                            newDiv7Nested.attr("data-id", data.posts[i].id);
-                            newDiv7Nested.attr("data-id", );
-                            newDiv7Nested.attr("role", "button");
-
-                            newDiv8Nested = $("<i>");
-                            newDiv8Nested.addClass("fa fa-trash-o");
-                            newDiv8Nested.attr("aria-hidden", "true");
-
-                            newDiv.append(newDiv2Nested);
-                            newDiv2Nested.append(newDiv3Nested);
-                            newDiv2Nested.append(newDiv4Nested);
-                            newDiv4Nested.append(newDiv5Nested);
-                            newDiv4Nested.append(newDiv6Nested);
-                            newDiv4Nested.append(newDiv7Nested);
-                            newDiv7Nested.append(newDiv8Nested);
-
-                            $(".myPosts").append(newDiv);
-
-                            // add correct img link depending on category
-                            switch (data.posts[i].category) {
-                                case "sports":
-                                    newDiv3Nested.attr("src", "/assets/img/sports.jpg");
-                                    break;
-
-                                case "entertainment":
-                                    newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
-                                    break;
-
-                                case "food":
-                                    newDiv3Nested.attr("src", "/assets/img/food.jpg");
-                                    break;
-
-                                case "miscellaneous":
-                                    newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
-                                    break;
-                            }
-                        }
-
-                    }
-                });
-
-                // API call to retrieve posts that user has accepted
-                $.ajax({
-                    url: "/api/my-post/accepted",
-                    type: 'GET',
-                    // Fetch the stored token from localStorage and set in the header
-                    headers: {
-                        "Authorization": localStorage.getItem('token')
-                    },
-                    success: function (data) {
-                        // console.log("success! Accepted posts");
-                        // console.log(data);
-
-                        // Build activity cards that user has joined here
-                        for (var i = 0; i < data.posts.length; i++) {
-
-                            var newDiv;
-                            var newDiv2Nested;
-                            var newDiv3Nested;
-                            var newDiv4Nested;
-                            var newDiv5Nested;
-                            var newDiv6Nested;
-                            var newDiv7Nested;
-
-                            newDiv = $("<div>");
-                            newDiv.addClass("col-md-3");
-
-                            newDiv2Nested = $("<div>");
-                            newDiv2Nested.addClass("thumbnail");
-
-                            newDiv3Nested = $("<img>");
-
-                            newDiv4Nested = $("<div>");
-                            newDiv4Nested.addClass("caption");
-
-                            newDiv5Nested = $("<h4>");
-                            newDiv5Nested.text(data.posts[i].title);
-
-                            newDiv6Nested = $("<a>");
-                            newDiv6Nested.attr("href", "#");
-                            newDiv6Nested.addClass("btn btn-info btn-xs detailsModalBtn");
-                            newDiv6Nested.attr("role”, “button");
-                            newDiv6Nested.attr("data-toggle", "modal");
-                            newDiv6Nested.attr("data-target", "#modalDetails");
-                            newDiv6Nested.text("Details");
-
-                            newDiv7Nested = $("<a>");
-                            newDiv7Nested.attr("href", "#");
-                            newDiv7Nested.addClass("btn btn-danger btn-xs pull-right cancelBtn");
-                            newDiv7Nested.attr("role”, “button");
-                            newDiv7Nested.text("Cancel");
-                            newDiv7Nested.attr("data-id", data.posts[i].id);
-
-                            // Add the activity details info to the detail button
-                            newDiv6Nested.attr("data-id", data.posts[i].id);
-                            newDiv6Nested.attr("data-title", data.posts[i].title);
-                            newDiv6Nested.attr("data-description", data.posts[i].description);
-                            newDiv6Nested.attr("data-address", data.posts[i].address);
-                            newDiv6Nested.attr("data-category", data.posts[i].category);
-                            newDiv6Nested.attr("data-time", data.posts[i].time);
-                            newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
-                            newDiv6Nested.attr("data-partner", data.posts[i].User.username);
-
-                            newDiv.append(newDiv2Nested);
-                            newDiv2Nested.append(newDiv3Nested);
-                            newDiv2Nested.append(newDiv4Nested);
-                            newDiv4Nested.append(newDiv5Nested);
-                            newDiv4Nested.append(newDiv6Nested);
-                            newDiv4Nested.append(newDiv7Nested);
-
-                            $("#attending").append(newDiv);
-
-                            // add correct img link depending on category
-                            switch (data.posts[i].category) {
-                                case "sports":
-                                    newDiv3Nested.attr("src", "/assets/img/sports.jpg");
-                                    break;
-
-                                case "entertainment":
-                                    newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
-                                    break;
-
-                                case "food":
-                                    newDiv3Nested.attr("src", "/assets/img/food.jpg");
-                                    break;
-
-                                case "miscellaneous":
-                                    newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
-                                    break;
-                            }
+    $(document).ready(function() {
+        console.log(window.localStorage);
+        // check if token exists using .getItem method
+        // run GET ajax call if token exists
+        if (window.localStorage.getItem("token")) {
+            // API call to retrieve posts that user has created
+            $.ajax({
+                url: "/api/my-post",
+                type: 'GET',
+                // Fetch the stored token from localStorage and set in the header
+                headers: {
+                    "Authorization": localStorage.getItem('token')
+                },
+                success: function(data) {
+                    // console.log("success! Created posts");
+                    // console.log(data);
+                    $("#username").text(data.username);
+                    // Build activity cards that user has created here
+                    for (var i = 0; i < data.posts.length; i++) {
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
+                        var newDiv7Nested;
+                        var newDiv8Nested;
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-3");
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
+                        newDiv3Nested = $("<img>");
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs btn-round btn-fill detailsModalBtn");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
+                        // Add the activity details info to the detail button
+                        newDiv6Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested.attr("data-title", data.posts[i].title);
+                        newDiv6Nested.attr("data-description", data.posts[i].description);
+                        newDiv6Nested.attr("data-address", data.posts[i].address);
+                        newDiv6Nested.attr("data-category", data.posts[i].category);
+                        newDiv6Nested.attr("data-time", data.posts[i].time);
+                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                        newDiv6Nested.attr("data-partner", data.posts[i].partnerUsername);
+                        newDiv7Nested = $("<a>");
+                        newDiv7Nested.attr("href", "#");
+                        newDiv7Nested.addClass("btn btn-danger btn-xs btn-round btn-fill pull-right delete");
+                        newDiv7Nested.attr("data-id", data.posts[i].id);
+                        newDiv7Nested.attr("data-id", );
+                        newDiv7Nested.attr("role", "button");
+                        newDiv8Nested = $("<i>");
+                        newDiv8Nested.addClass("fa fa-trash-o");
+                        newDiv8Nested.attr("aria-hidden", "true");
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+                        newDiv4Nested.append(newDiv7Nested);
+                        newDiv7Nested.append(newDiv8Nested);
+                        $(".myPosts").append(newDiv);
+                        // add correct img link depending on category
+                        switch (data.posts[i].category) {
+                            case "sports":
+                                newDiv3Nested.attr("src", "/assets/img/sports.jpg");
+                                break;
+                            case "entertainment":
+                                newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
+                                break;
+                            case "food":
+                                newDiv3Nested.attr("src", "/assets/img/food.jpg");
+                                break;
+                            case "miscellaneous":
+                                newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
+                                break;
                         }
                     }
-                });
+                }
+            });
+            // API call to retrieve posts that user has accepted
+            $.ajax({
+                url: "/api/my-post/accepted",
+                type: 'GET',
+                // Fetch the stored token from localStorage and set in the header
+                headers: {
+                    "Authorization": localStorage.getItem('token')
+                },
+                success: function(data) {
+                    // console.log("success! Accepted posts");
+                    // console.log(data);
+                    // Build activity cards that user has joined here
+                    for (var i = 0; i < data.posts.length; i++) {
+                        var newDiv;
+                        var newDiv2Nested;
+                        var newDiv3Nested;
+                        var newDiv4Nested;
+                        var newDiv5Nested;
+                        var newDiv6Nested;
+                        var newDiv7Nested;
+                        newDiv = $("<div>");
+                        newDiv.addClass("col-md-3");
+                        newDiv2Nested = $("<div>");
+                        newDiv2Nested.addClass("thumbnail");
+                        newDiv3Nested = $("<img>");
+                        newDiv4Nested = $("<div>");
+                        newDiv4Nested.addClass("caption");
+                        newDiv5Nested = $("<h4>");
+                        newDiv5Nested.text(data.posts[i].title);
+                        newDiv6Nested = $("<a>");
+                        newDiv6Nested.attr("href", "#");
+                        newDiv6Nested.addClass("btn btn-info btn-xs btn-round btn-fill detailsModalBtn");
+                        newDiv6Nested.attr("role”, “button");
+                        newDiv6Nested.attr("data-toggle", "modal");
+                        newDiv6Nested.attr("data-target", "#modalDetails");
+                        newDiv6Nested.text("Details");
+                        newDiv7Nested = $("<a>");
+                        newDiv7Nested.attr("href", "#");
+                        newDiv7Nested.addClass("btn btn-danger btn-xs btn-round btn-fill pull-right cancelBtn");
+                        newDiv7Nested.attr("role”, “button");
+                        newDiv7Nested.text("Cancel");
+                        newDiv7Nested.attr("data-id", data.posts[i].id);
+                        // Add the activity details info to the detail button
+                        newDiv6Nested.attr("data-id", data.posts[i].id);
+                        newDiv6Nested.attr("data-title", data.posts[i].title);
+                        newDiv6Nested.attr("data-description", data.posts[i].description);
+                        newDiv6Nested.attr("data-address", data.posts[i].address);
+                        newDiv6Nested.attr("data-category", data.posts[i].category);
+                        newDiv6Nested.attr("data-time", data.posts[i].time);
+                        newDiv6Nested.attr("data-UserId", data.posts[i].UserId);
+                        newDiv6Nested.attr("data-partner", data.posts[i].User.username);
+                        newDiv.append(newDiv2Nested);
+                        newDiv2Nested.append(newDiv3Nested);
+                        newDiv2Nested.append(newDiv4Nested);
+                        newDiv4Nested.append(newDiv5Nested);
+                        newDiv4Nested.append(newDiv6Nested);
+                        newDiv4Nested.append(newDiv7Nested);
+                        $("#attending").append(newDiv);
+                        // add correct img link depending on category
+                        switch (data.posts[i].category) {
+                            case "sports":
+                                newDiv3Nested.attr("src", "/assets/img/sports.jpg");
+                                break;
+                            case "entertainment":
+                                newDiv3Nested.attr("src", "/assets/img/entertainment.jpg");
+                                break;
+                            case "food":
+                                newDiv3Nested.attr("src", "/assets/img/food.jpg");
+                                break;
+                            case "miscellaneous":
+                                newDiv3Nested.attr("src", "assets/img/miscellaneous.jpg");
+                                break;
+                        }
+                    }
+                }
+            });
+        } else {
+            alert("Please log-in");
+            window.location.href = "/sign-in";
+        }
+        // allows user to create post...grabs values from form
+        $("#createPost").on("click", function(event) {
+            event.preventDefault();
+            // if token does not exists, user not logged-in
+            if (!window.localStorage.getItem("token")) {
+                alert("You need to be signed in!");
+                window.location.href = "/sign-in";
+                // if token exists, they are logged-in and assign form data to newPost 
+            } else if (!$("#title").val().trim()) {
+                $('#alertModalRed').modal('show');
+                $("#alertModalMessageRed").text("Please enter a TITLE!");
+            } else if (!$("#category").val().trim()) {
+                $('#alertModalRed').modal('show');
+                $("#alertModalMessageRed").text("Please select a CATEGORY!");
+            } else if (!$("#address").val().trim()) {
+                $('#alertModalRed').modal('show');
+                $("#alertModalMessageRed").text("Please enter an ADDRESS!");
+            } else if (!$("#time").val().trim()) {
+                $('#alertModalRed').modal('show');
+                $("#alertModalMessageRed").text("Please select a TIME!");
             } else {
-                alert("Please log-in");
-                window.location.href = "/sign-in";
+                var newPost = {
+                    title: $("#title").val().trim(),
+                    category: $("#category").val().trim(),
+                    address: $("#address").val().trim(),
+                    time: $("#time").val().trim(),
+                    description: $("#description").val().trim(),
+                    authorization: window.localStorage.getItem("token")
+                };
+                console.log(newPost.time);
+                // query DB to add data from newPort object
+                $.post("/api/post", newPost)
+                    .done(function(data) {
+                        window.location.href = "/my-posts";
+                    });
             }
-
-            // allows user to create post...grabs values from form
-            $("#createPost").on("click", function (event) {
-                event.preventDefault();
-
-                // if token does not exists, user not logged-in
-                if (!window.localStorage.getItem("token")) {
-                    alert("You need to be signed in!");
-                    window.location.href = "/sign-in";
-                    // if token exists, they are logged-in and assign form data to newPost 
-                } else if (!$("#title").val().trim()) {
-                    $('#alertModalRed').modal('show');
-                    $("#alertModalMessageRed").text("Please enter a TITLE!");
-                } else if (!$("#category").val().trim()) {
-                    $('#alertModalRed').modal('show');
-                    $("#alertModalMessageRed").text("Please select a CATEGORY!");
-                } else if (!$("#address").val().trim()) {
-                    $('#alertModalRed').modal('show');
-                    $("#alertModalMessageRed").text("Please enter an ADDRESS!");
-                } else if (!$("#time").val().trim()) {
-                    $('#alertModalRed').modal('show');
-                    $("#alertModalMessageRed").text("Please select a TIME!");
-                } else {
-                    var newPost = {
-                        title: $("#title").val().trim(),
-                        category: $("#category").val().trim(),
-                        address: $("#address").val().trim(),
-                        time: $("#time").val().trim(),
-                        description: $("#description").val().trim(),
-                        authorization: window.localStorage.getItem("token")
-                    };
-
-                    console.log(newPost.time);
-
-                    // query DB to add data from newPort object
-                    $.post("/api/post", newPost)
-                        .done(function (data) {
-                            window.location.href = "/my-posts";
-                        });
+        });
+        $(document).on("click", ".delete", function(event) {
+            $("#confirmDelBtn").attr("data-id", $(this).data("id"));
+            $("#confirmDelBtn").attr("data-userid", $(this).data("userid"));
+            $('#confirmModalDelete').modal('show');
+        });
+        $(document).on("click", ".cancelBtn", function(event) {
+            $("#confirmCancelBtn").attr("data-id", $(this).data("id"));
+            $("#confirmCancelBtn").attr("data-userid", $(this).data("userid"));
+            $('#confirmModalCancel').modal('show');
+        });
+        // delete button on-click (each card will have unique data attr id)
+        // sequelize delete function (using data attr id)
+        $(document).on("click", "#confirmDelBtn", function(event) {
+            event.preventDefault();
+            var deleteData = {
+                authorization: window.localStorage.getItem("token"),
+                activityID: $(this).attr("data-id")
+            }
+            $.ajax({
+                url: "/api/my-activities/",
+                type: 'DELETE',
+                data: deleteData,
+                success: function() {
+                    window.location.href = "/my-posts";
                 }
-
             });
-
-            $(document).on("click", ".delete", function (event) {
-                $("#confirmDelBtn").attr("data-id", $(this).data("id"));
-                $("#confirmDelBtn").attr("data-userid", $(this).data("userid"));
-                $('#confirmModalDelete').modal('show');
-            });
-
-            $(document).on("click", ".cancelBtn", function (event) {
-                $("#confirmCancelBtn").attr("data-id", $(this).data("id"));
-                $("#confirmCancelBtn").attr("data-userid", $(this).data("userid"));
-                $('#confirmModalCancel').modal('show');
-            });
-
-            // delete button on-click (each card will have unique data attr id)
-            // sequelize delete function (using data attr id)
-            $(document).on("click", "#confirmDelBtn", function (event) {
-                event.preventDefault();
-
-                var deleteData = {
-                    authorization: window.localStorage.getItem("token"),
-                    activityID: $(this).attr("data-id")
+        })
+        // populate modal with info upon detail button click
+        $(document).on("click", ".detailsModalBtn", function() {
+            console.log("clicked modal");
+            $("#detail-title").text($(this).data("title"));
+            $("#detail-description").text($(this).data("description"));
+            $("#detail-time").text($(this).data("time"));
+            $("#detail-address").text($(this).data("address"));
+            $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
+            $("#detail-partner").text($(this).data("partner"));
+            // time conversion to make it presentable
+            var uglyTime = $(this).data("time");
+            var year = uglyTime.substring(0, 4);
+            var month = uglyTime.substring(5, 7);
+            var day = uglyTime.substring(8, 10);
+            var time = uglyTime.substring(11, 16);
+            var timezone = uglyTime.substring(21, 24);
+            time = time.split(':'); // convert to array
+            // fetch
+            var hours = Number(time[0]);
+            var minutes = Number(time[1]);
+            // calculate
+            var timeValue;
+            if (hours > 0 && hours <= 12) {
+                timeValue = "" + hours;
+            } else if (hours > 12) {
+                timeValue = "" + (hours - 12);
+            } else if (hours == 0) {
+                timeValue = "12";
+            }
+            timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
+            timeValue += (hours >= 12) ? " PM" : " AM"; // get AM/PM
+            var prettyTime = month + "/" + day + "/" + year + " @ " + timeValue + " PST";
+            $("#detail-time").text(prettyTime);
+        })
+        // if cancel button clicked, then update post partnerID = null
+        $(document).on("click", "#confirmCancelBtn", function(event) {
+            event.preventDefault();
+            var cancelUser = {
+                authorization: window.localStorage.getItem("token"),
+                activityID: $(this).attr("data-id")
+            }
+            $.ajax({
+                url: "/api/post",
+                type: "PUT",
+                data: cancelUser,
+                success: function() {
+                    window.location.href = "/my-posts";
                 }
-                $.ajax({
-                    url: "/api/my-activities/",
-                    type: 'DELETE',
-                    data: deleteData,
-                    success: function () {
-                        window.location.href = "/my-posts";
-                    }
-                });
-
-            })
-
-            // populate modal with info upon detail button click
-            $(document).on("click", ".detailsModalBtn", function () {
-
-                console.log("clicked modal");
-
-                $("#detail-title").text($(this).data("title"));
-                $("#detail-description").text($(this).data("description"));
-                $("#detail-time").text($(this).data("time"));
-                $("#detail-address").text($(this).data("address"));
-                $("#detail-category").text($(this).data("category").charAt(0).toUpperCase() + $(this).data("category").slice(1));
-                $("#detail-partner").text($(this).data("partner"));
-
-                // time conversion to make it presentable
-                var uglyTime = $(this).data("time");
-
-                var year = uglyTime.substring(0, 4);
-                var month = uglyTime.substring(5, 7);
-                var day = uglyTime.substring(8, 10);
-                var time = uglyTime.substring(11, 16);
-                var timezone = uglyTime.substring(21, 24);
-
-                time = time.split(':'); // convert to array
-
-                // fetch
-                var hours = Number(time[0]);
-                var minutes = Number(time[1]);
-
-                // calculate
-                var timeValue;
-
-                if (hours > 0 && hours <= 12) {
-                    timeValue = "" + hours;
-                } else if (hours > 12) {
-                    timeValue = "" + (hours - 12);
-                } else if (hours == 0) {
-                    timeValue = "12";
-                }
-
-                timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-                timeValue += (hours >= 12) ? " PM" : " AM";  // get AM/PM
-
-                var prettyTime = month + "/" + day + "/" + year + " @ " + timeValue + " PST";
-                $("#detail-time").text(prettyTime);
-            })
-
-            // if cancel button clicked, then update post partnerID = null
-            $(document).on("click", "#confirmCancelBtn", function (event) {
-                event.preventDefault();
-
-                var cancelUser = {
-                    authorization: window.localStorage.getItem("token"),
-                    activityID: $(this).attr("data-id")
-                }
-                $.ajax({
-                    url: "/api/post",
-                    type: "PUT",
-                    data: cancelUser,
-                    success: function () {
-                        window.location.href = "/my-posts";
-                    }
-                });
             });
-
-            // allows user to sign out...deletes token and redirects to login
-            $("#signOut").on("click", function () {
-                window.localStorage.removeItem("token");
-                window.location.href = "/sign-in";
-            });
-
-        }) // closes document.ready fn
+        });
+        // allows user to sign out...deletes token and redirects to login
+        $("#signOut").on("click", function() {
+            window.localStorage.removeItem("token");
+            window.location.href = "/sign-in";
+        });
+    }) // closes document.ready fn
     </script>
 </body>
 
